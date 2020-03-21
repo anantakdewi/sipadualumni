@@ -36,45 +36,52 @@
 
     <form action="<?php echo base_url() ?>index.php/auth/reg_action" method="post">
       <div class="form-group has-feedback">
-        <input type="text" name="nama" class="form-control" placeholder="Nama Lengkap">
+        <input type="text" name="nama" class="form-control" placeholder="Nama Lengkap" set_value="<?php set_value('nama')?>">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
+        <?php echo form_error('nama', '<small class="text-danger pl-3">', '</small>');?>
       </div>
       <div class="form-group has-feedback">
-        <input type="text" name="email" class="form-control" placeholder="Email">
+        <input type="text" name="email" class="form-control" placeholder="Email" set_value="<?php set_value('email')?>">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+        <?php echo form_error('email', '<small class="text-danger pl-3">', '</small>');?>
       </div>
       <div class="form-group has-feedback">
         <input type="password" name="password" class="form-control" placeholder="Password">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        <?php echo form_error('password', '<small class="text-danger pl-3">', '</small>');?>
       </div>
       <div class="form-group has-feedback">
         <input type="password" name="repassword" class="form-control" placeholder="Retype password">
-        <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
-      </div>
-      <div class="form-group has-feedback">
-        <input type="text" name="nip" class="form-control" placeholder="NIP">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        <?php echo form_error('repassword', '<small class="text-danger pl-3">', '</small>');?>
       </div>
       <div class="form-group has-feedback">
-        <input type="text" name="instansi" class="form-control" placeholder="Instansi">
-        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        <input type="text" name="nip" class="form-control" placeholder="NIP" set_value="<?php set_value('nip')?>">
+        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+        <?php echo form_error('nip', '<small class="text-danger pl-3">', '</small>');?>
       </div>
-     
       <div class="form-group has-feedback">
-
-                <div class="input-group date">
-                  <div class="input-group-addon">
-                    <i class="fa fa-calendar"></i>
-                  </div>
-                  <input type="text" class="form-control pull-right" id="datepicker">
-                </div>
-                <!-- /.input group -->
-
+        <input type="text" name="instansi" class="form-control" placeholder="Instansi" set_value="<?php set_value('instansi')?>">
+        <span class="glyphicon glyphicon-briefcase form-control-feedback"></span>
+        <?php echo form_error('instansi', '<small class="text-danger pl-3">', '</small>');?>
       </div>
+
       
-      <div class="form-group has-feedback">
+      <!-- <div class="form-group has-feedback">
         <input type="text" name="tgl_tempat" class="form-control" placeholder="Tanggal Penempatan">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div> -->
+
+      <div class="form-group has-feedback">
+
+      <!-- <div class="input-group date"> -->
+
+        <input type="text" name="tgl_tempat" class="form-control" id="datepicker" placeholder="Tanggal Penempatan" set_value="<?php set_value('tgl_tempat')?>">
+        <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
+        <?php echo form_error('tgl_tempat', '<small class="text-danger pl-3">', '</small>');?>
+      <!-- </div> -->
+      <!-- /.input group -->
+
       </div>
 
       <div class="row">
@@ -94,7 +101,7 @@
     </form>
 
 
-    <a href="<?php echo base_url() ?>index.php/auth" class="text-center">I already have a membership</a>
+    <a href="<?php echo base_url('index.php/auth/login') ?>" class="text-center">I already have a membership</a>
   </div>
   <!-- /.form-box -->
 </div>
