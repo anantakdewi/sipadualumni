@@ -33,9 +33,22 @@ class Pemohon extends CI_Controller {
 
 	public function index()
 	{
-        $this->load->view('dashboard/template/dashboard_header');
+        // data for active nav
+        $data = array('nav_data' => 'dashboard');
+
+        $this->load->view('dashboard/template/dashboard_header',$data);
         $this->load->view('dashboard/pemohon/dashboard_pemohon');
 		$this->load->view('dashboard/template/dashboard_footer');
+    }
+
+    public function monitoring()
+    {
+        // data for active nav
+        $data = array('nav_data' => 'monitoring');
+
+        $this->load->view('dashboard/template/dashboard_header', $data);
+        $this->load->view('dashboard/pemohon/monitoring_pemohon');
+        $this->load->view('dashboard/template/dashboard_footer');
     }
 
 

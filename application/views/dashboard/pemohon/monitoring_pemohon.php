@@ -1,6 +1,6 @@
 <div class="row">
 
-    <div class="col-md-7">
+    <div class="col-md-12">
         <div class="box">
         <div class="box-header with-border">
             <h3 class="box-title">Progress Tracker Surat</h3>
@@ -100,51 +100,3 @@
         <!-- /.box -->
     </div>
     <!-- /.col -->
-
-
-    <div class="col-md-5">
-        <div class="box">
-        <div class="box-header with-border">
-            <h3 class="box-title">Pengumuman</h3>
-
-            <div class="box-tools pull-right">
-            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-            </button>
-            
-            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-            </div>
-        </div>
-        <!-- /.box-header -->
-        <div class="box-body">
-
-            <!-- <ul class="products-list product-list-in-box"> -->
-            <!-- list pengumunan start here -->
-            <!-- <li class="item">
-                <div class="product-img">
-                <img src="<?php echo base_url()?>assets/dist/img/default-50x50.gif" alt="Product Image">
-                </div>
-                <div class="product-info">
-                <a href="javascript:void(0)" class="product-title">Samsung TV
-                    <span class="label label-warning pull-right">$1800</span></a>
-                    <span class="product-description">
-                        Samsung 32" 1080p 60Hz LED Smart HDTV.
-                    </span>
-                </div>
-            </li> -->
-            <!-- list pengumunan end here -->
- 
-
-            <!-- </ul> -->
-
-            <h5 class="text-muted text-center">Tidak ada Pengumuman</h5>
-
-        </div>
-        <!-- ./box-body -->
-        
-        </div>
-        <!-- /.box -->
-    </div>
-    <!-- /.col -->
-
-</div>
-    <!-- /.row -->
