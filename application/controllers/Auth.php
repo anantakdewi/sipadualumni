@@ -30,10 +30,26 @@ class Auth extends CI_Controller {
 
     }
 
-	// public function index()
-	// {
-	// 	$this->load->view('auth/login');
-    // }
+	public function index()
+	{
+        if(empty($this->session->userdata('email'))){
+            
+            redirect(('auth/login'));
+
+        } else {
+            
+            if($this->session->userdata('role_id') == 2){
+
+                redirect(('pemohon/dashboard'));
+
+            } else if($this->session->userdata('role_id') == 1){
+
+                redirect(('petugas/dashboard'));
+
+            }
+        }
+		
+    }
     
     public function register()
 	{
@@ -49,7 +65,7 @@ class Auth extends CI_Controller {
         $this->form_validation->set_rules('repassword', 'Password Confirmation', 'required|trim|matches[password]');
         $this->form_validation->set_rules('nip', 'NIP', 'required|trim|max_length[20]');
         $this->form_validation->set_rules('instansi', 'Instansi', 'required|trim|max_length[100]');
-        $this->form_validation->set_rules('tgl_tempat', 'Tanggal Penempatan', 'required|trim');
+        $this->form_validation->set_rules('tahun_lulus', 'Tahun Lulus', 'required|trim');
 
         if($this->form_validation->run() == false){
             $this->load->view('auth/register');
@@ -61,9 +77,9 @@ class Auth extends CI_Controller {
             // $repassword = $this->input->post('repassword');
             $nip = $this->input->post('nip');
             $instansi = $this->input->post('instansi');
-            $tgl_tempat = $this->input->post('tgl_tempat');
+            $tahun_lulus = $this->input->post('tahun_lulus');
 
-            // if ($password != $repassword) {
+            // if ($password != $repassword) {`
             //     echo "Password tidak sama.";
             // }else{
 
@@ -73,7 +89,7 @@ class Auth extends CI_Controller {
                 'password'=>$password,
                 'nip'=>$nip,
                 'instansi'=>$instansi,
-                'tgl_penempatan'=>$tgl_tempat,
+                'tahun_lulus'=>$tahun_lulus,
                 'role_id' => 2, // 2 : Alumni, 1 : Admin
                 'active' => 0, //0 : belum verifikasi, 1 : sudah verifikasi
             );
@@ -117,11 +133,12 @@ class Auth extends CI_Controller {
                                 'email' => $alumni['email'],
                                 'nama' => $alumni['nama'],
                                 'nip' => $alumni['nip'],
+                                'role_id' => $alumni['role_id'],
                             ];
 
                             $this->session->set_userdata($user_data);
 
-                            redirect(base_url('index.php/pemohon'));
+                            redirect(base_url('pemohon/dashboard'));
                             
 
                         } else {
@@ -131,7 +148,7 @@ class Auth extends CI_Controller {
                             '<div class="alert alert-danger" role="alert">
                             Email dan Password tidak cocok!</div>');
                             
-                            redirect(base_url('index.php/auth/login'));
+                            redirect(base_url('auth/login'));
 
                         }
                         
@@ -141,7 +158,7 @@ class Auth extends CI_Controller {
                         '<div class="alert alert-danger" role="alert">
                         Email belum terverifikasi!, mohon cek inbox email anda dan segera verifikasi </div>');
 
-                        redirect(base_url('index.php/auth/login'));
+                        redirect(base_url('auth/login'));
                         
                     }
                     
@@ -151,7 +168,7 @@ class Auth extends CI_Controller {
                     '<div class="alert alert-danger" role="alert">
                     Email tidak terdaftar! </div>');
 
-                    redirect(base_url('index.php/auth/login'));
+                    redirect(base_url('auth/login'));
                 }
 
             }

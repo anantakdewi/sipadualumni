@@ -52,3 +52,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'auth';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+
+
+/**
+ * Routes Buatan Sendiri
+ */
+
+$route['/'] = 'auth/login';
+
+
+// Dashboard Pemohon
+$route['pemohon/dashboard'] = 'pemohon/dashboard_pemohon';
+$route['pemohon/monitoring'] = 'pemohon/dashboard_pemohon/monitoring';
+$route['pemohon/legalisir'] = 'pemohon/dashboard_pemohon/legalisir';
+$route['pemohon/pengambilan'] = 'pemohon/dashboard_pemohon/pengambilan';
+$route['pemohon/lainnya'] = 'pemohon/dashboard_pemohon/lainnya';
+
+// Legalisir Pemohon
+$route['pemohon/legalisir/pengajuan'] = 'pemohon/legalisir_pemohon/showForm';
+
+// Pengambilan Pemohon
+$route['pemohon/pengambilan/pengajuan'] = 'pemohon/pengambilan_pemohon/showForm';

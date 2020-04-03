@@ -37,7 +37,7 @@
 
     <form action="<?php echo base_url() ?>index.php/auth/login" method="post">
       <div class="form-group has-feedback">
-        <input type="email" class="form-control" name="email" placeholder="Email" set_value="<?php set_value('email')?>">
+        <input type="email" class="form-control" name="email" placeholder="Email" value="<?php echo set_value('email')?>">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
         <?php echo form_error('email', '<small class="text-danger pl-3">', '</small>');?>
       </div>

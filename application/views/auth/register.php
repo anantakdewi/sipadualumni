@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Registration Page</title>
+  <title>SIPADU ALUMNI | Register</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
@@ -28,20 +28,20 @@
 <body class="hold-transition register-page">
 <div class="register-box">
   <div class="register-logo">
-    <a href="../../index2.html"><b>Admin</b>LTE</a>
+    <b>SIPADU</b>Alumni
   </div>
 
   <div class="register-box-body">
-    <p class="login-box-msg">Register a new membership</p>
+    <p class="login-box-msg">Membuat akun baru</p>
 
-    <form action="<?php echo base_url() ?>index.php/auth/reg_action" method="post">
+    <form action="<?php echo base_url() ?>auth/reg_action" method="post" autocomplete="off">
       <div class="form-group has-feedback">
-        <input type="text" name="nama" class="form-control" placeholder="Nama Lengkap" set_value="<?php set_value('nama')?>">
+        <input type="text" name="nama" class="form-control" placeholder="Nama Lengkap" value="<?php echo set_value('nama')?>">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
         <?php echo form_error('nama', '<small class="text-danger pl-3">', '</small>');?>
       </div>
       <div class="form-group has-feedback">
-        <input type="text" name="email" class="form-control" placeholder="Email" set_value="<?php set_value('email')?>">
+        <input type="text" name="email" class="form-control" placeholder="Email" value="<?php echo set_value('email')?>">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
         <?php echo form_error('email', '<small class="text-danger pl-3">', '</small>');?>
       </div>
@@ -56,12 +56,12 @@
         <?php echo form_error('repassword', '<small class="text-danger pl-3">', '</small>');?>
       </div>
       <div class="form-group has-feedback">
-        <input type="text" name="nip" class="form-control" placeholder="NIP" set_value="<?php set_value('nip')?>">
+        <input type="text" id="nip" name="nip" class="form-control" placeholder="NIP" value="<?php echo set_value('nip')?>">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
         <?php echo form_error('nip', '<small class="text-danger pl-3">', '</small>');?>
       </div>
       <div class="form-group has-feedback">
-        <input type="text" name="instansi" class="form-control" placeholder="Instansi" set_value="<?php set_value('instansi')?>">
+        <input type="text" name="instansi" class="form-control" placeholder="Instansi" value="<?php echo set_value('instansi')?>">
         <span class="glyphicon glyphicon-briefcase form-control-feedback"></span>
         <?php echo form_error('instansi', '<small class="text-danger pl-3">', '</small>');?>
       </div>
@@ -76,9 +76,9 @@
 
       <!-- <div class="input-group date"> -->
 
-        <input type="text" name="tgl_tempat" class="form-control" id="datepicker" placeholder="Tanggal Penempatan" set_value="<?php set_value('tgl_tempat')?>">
+        <input type="text" name="tahun_penempatan" class="form-control" id="datepicker" placeholder="Tahun Pengangkatan" value="<?php echo set_value('tgl_tempat')?>">
         <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
-        <?php echo form_error('tgl_tempat', '<small class="text-danger pl-3">', '</small>');?>
+        <?php echo form_error('tahun_penempatan', '<small class="text-danger pl-3">', '</small>');?>
       <!-- </div> -->
       <!-- /.input group -->
 
@@ -115,6 +115,7 @@
 <script src="<?php echo base_url() ?>assets/plugins/iCheck/icheck.min.js"></script>
 <!-- bootstrap datepicker -->
 <script src="<?php echo base_url() ?>assets/plugins/datepicker/bootstrap-datepicker.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
 
 
 <script>
@@ -128,9 +129,19 @@
 
     //Date picker
     $('#datepicker').datepicker({
-      autoclose: true
+      format: "yyyy",
+      weekStart: 1,
+      orientation: "bottom",
+      language: "{{ app.request.locale }}",
+      keyboardNavigation: false,
+      viewMode: "years",
+      minViewMode: "years"
     });
-
+    
+    //Mask NIP
+    $(function () {
+      $('#nip').mask('00000000 000000 0 000');
+    });
 
 </script>
 </body>

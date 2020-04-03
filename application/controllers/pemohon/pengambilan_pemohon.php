@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Pemohon extends CI_Controller {
+class pengambilan_pemohon extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -26,31 +26,23 @@ class Pemohon extends CI_Controller {
         $this->load->library('form_validation');
 
         if(is_null($this->session->userdata('email'))){
-            redirect((base_url('index.php/auth/login')));
+            redirect((base_url('auth/login')));
         };
 
     }
 
-	public function index()
-	{
-        // data for active nav
-        $data = array('nav_data' => 'dashboard');
-
-        $this->load->view('dashboard/template/dashboard_header',$data);
-        $this->load->view('dashboard/pemohon/dashboard_pemohon');
-		$this->load->view('dashboard/template/dashboard_footer');
-    }
-
-    public function monitoring()
+    public function showForm()
     {
-        // data for active nav
-        $data = array('nav_data' => 'monitoring');
+        // data for nav
+        $data = array(
+            'nav_data' => 'pengambilan',
+            'title' => 'Pengajuan Pengambilan Ijazah dan Transkrip Asli',
+            'breadcumb' => array('Pengambilan','Pengajuan'),
+            'small_title' => 'Pengajuan Pengambilan Ijazah',
+        );
 
         $this->load->view('dashboard/template/dashboard_header', $data);
-        $this->load->view('dashboard/pemohon/monitoring_pemohon');
+        $this->load->view('dashboard/pemohon/pengambilan/pengambilan_pengajuan');
         $this->load->view('dashboard/template/dashboard_footer');
     }
-
-
-
 }

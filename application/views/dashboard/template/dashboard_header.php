@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Sipadu Alumni | Dashboard</title>
+  <title>Sipadu Alumni | <?php echo $small_title ?> </title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
@@ -15,8 +15,14 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="<?php echo base_url() ?>assets/dist/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
-       folder instead of downloading all of them to reduce the load. -->
+  folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="<?php echo base_url() ?>assets/dist/css/skins/_all-skins.min.css">
+  <!-- bootstrap datepicker -->
+  <link rel="stylesheet" href="<?php echo base_url() ?>assets/plugins/datepicker/datepicker3.css">
+  <!-- iCheck for checkboxes and radio inputs -->
+  <link rel="stylesheet" href="<?php echo base_url() ?>assets/plugins/iCheck/all.css">
+  <!-- custom css -->
+  <link rel="stylesheet" href="<?php echo base_url() ?>assets/custom_css/custom_style.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -145,7 +151,7 @@
             echo('<li class="active treeview">');
         } else {echo('<li class="treeview">');}?>
         
-          <a href="<?php echo base_url()?>index.php/pemohon">
+          <a href="<?php echo base_url()?>pemohon/dashboard">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
           </a>
           
@@ -160,7 +166,7 @@
             echo('<li class="active treeview">');
         } else {echo('<li class="treeview">');}?>
 
-          <a href="<?php echo base_url()?>index.php/pemohon/monitoring">
+          <a href="<?php echo base_url()?>pemohon/monitoring">
             <i class="fa fa-files-o"></i>
             <span>Monitoring</span>
             <!-- <span class="pull-right-container">
@@ -180,7 +186,7 @@
             echo('<li class="active treeview">');
         } else {echo('<li class="treeview">');}?>
 
-          <a href="pages/widgets.html">
+          <a href="<?php echo base_url()?>pemohon/legalisir">
             <i class="fa fa-th"></i> <span>Legalisir</span>
             <!-- <span class="pull-right-container">
               <small class="label pull-right bg-green">new</small>
@@ -193,19 +199,10 @@
             echo('<li class="active treeview">');
         } else {echo('<li class="treeview">');}?>
 
-          <a href="#">
+          <a href="<?php echo base_url()?>pemohon/pengambilan">
             <i class="fa fa-pie-chart"></i>
             <span>Pengambilan</span>
-            <!-- <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span> -->
           </a>
-          <!-- <ul class="treeview-menu">
-            <li><a href="pages/charts/chartjs.html"><i class="fa fa-circle-o"></i> ChartJS</a></li>
-            <li><a href="pages/charts/morris.html"><i class="fa fa-circle-o"></i> Morris</a></li>
-            <li><a href="pages/charts/flot.html"><i class="fa fa-circle-o"></i> Flot</a></li>
-            <li><a href="pages/charts/inline.html"><i class="fa fa-circle-o"></i> Inline charts</a></li>
-          </ul> -->
         </li>
 
         <!-- make active nav bar if selected -->
@@ -213,7 +210,7 @@
             echo('<li class="active treeview">');
         } else {echo('<li class="treeview">');}?>
 
-          <a href="#">
+          <a href="<?php echo base_url()?>pemohon/lainnya">
             <i class="fa fa-pie-chart"></i>
             <span>Permohonan Lainnya</span>
             <!-- <span class="pull-right-container">
@@ -238,12 +235,19 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Dashboard
-        <small>Control panel</small>
+        <?php echo $title ?>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Dashboard</li>
+        <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        
+        <?php 
+          if(!empty($breadcumb)){
+            foreach ($breadcumb as $br) {
+              echo('<li class="active">'.$br.'</li>');
+            }    
+          }        
+        ?>
+        
       </ol>
     </section>
 
