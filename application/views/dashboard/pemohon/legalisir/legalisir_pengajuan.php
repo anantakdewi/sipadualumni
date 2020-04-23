@@ -9,14 +9,15 @@
                 <div class="form-group">
                   <label>Pengambilan Dokumen</label>
                   <select class="form-control" name="pengambilan_dokumen">
-                    <option value="1">Kirim POS</option>
-                    <option value="2">GOJEK</option>
-                    <option value="3">NITIP GAN</option>
+                    <option value="1">Unduh pada sistem</option>
+                    <option value="2">Ambil langsung ke kampus</option>
+                    <option value="3">Ambil langsung diwakilkan</option>
+                    <option value="4">Kirim melalui pos</option>
                   </select>
                 </div>
 
                 <div class="form-group">
-                    <label>Alamat <sup class="text-danger">*</sup></label>
+                    <label>Alamat <sup class="text-danger">*diisi jika dikirim melalui pos</sup></label>
                     <input type="text" class="form-control" name="alamat" value="">
                 </div>
 
@@ -60,14 +61,14 @@
 
                 <div class="form-group">
                     <!-- <div class="col-md-" style="padding-left:0px;padding-bottom:15px"> -->
-                        <label>Bukti Pendaftaran Universitas Tujuan</label>
+                        <label>Unggah Bukti Pendaftaran Universitas Tujuan</label>
                         <input type="file" name="surat_pendaftaran_univ" class="form-control">
                     <!-- </div> -->
                 </div>
 
                 <div class="form-group">
                     <!-- <div class="col-md-" style="padding-left:0px;padding-bottom:15px"> -->
-                        <label>Bukti Pendaftaran Universitas Tujuan</label>
+                        <label>Unggah Bukti Pendaftaran Universitas Tujuan</label>
                         <input type="file" name="surat_pendaftaran_univ" class="form-control">
                     <!-- </div> -->
                 </div>

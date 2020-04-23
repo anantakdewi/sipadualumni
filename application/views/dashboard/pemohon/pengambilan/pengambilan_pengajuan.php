@@ -9,9 +9,8 @@
                 <div class="form-group">
                   <label>Pengambilan Dokumen</label>
                   <select class="form-control" name="pengambilan_dokumen">
-                    <option value="1">Kirim POS</option>
-                    <option value="2">GOJEK</option>
-                    <option value="3">NITIP GAN</option>
+                    <option value="1">Ambil langsung ke kampus</option>
+                    <option value="2">Ambil langsung diwakilkan</option>
                   </select>
                 </div>
 

@@ -21,7 +21,7 @@
         </br>3. Untuk alumni yang belum menyelesaikan masa Ikatan Dinas (ID):
         </br>a. <b>Bukti Asli pembayaran tuntutan ganti rugi (TGR) dari Kementerian Keuangan</b>   
         </br>b. <b>Materai Rp.6000,-</b>
-        </br>Surat Kuasa bila pengambilan dikuasakan/diwakilkan
+        </br>c. Surat Kuasa bila pengambilan dikuasakan/diwakilkan
         </br>4. Pemohon memilih maksimal 5 hari kerja sebelum tanggal pengambilan misalnya, pemohon yang akan mengambil ijazah asli di tanggal 10 maka harus mengkonfirmasi paling lambat tanggal 5.
         </br>5. Pemohon yang telah menerima dokumen harus mengkonfirmasi penerimaan dokumen agar dapat mengajukan permohonan lainnya di kemudian hari.
 
