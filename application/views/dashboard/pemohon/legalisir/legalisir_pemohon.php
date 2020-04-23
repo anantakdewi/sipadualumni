@@ -14,7 +14,22 @@
         </div>
         <!-- /.box-header -->
         <div class="box-body">
-         
+             1. Pemohon mengajukan <b>surat permohonan legalisir kepada Direktur Politeknik Statistika STIS</b> sesuai dengan format surat baku yang telah ditentukan.
+        <br/>2. <b>Pemohon dengan masa penempatan minimal 4 (empat) tahun</b>
+        <br/> Legalisir ijazah dan transkrip (Bahasa Indonesia maupun Bahasa Inggris) akan diberikan maksimal 5 lembar.
+        <br/> Permohonan translasi ke Bahasa Inggris hanya akan dibuatkan jika melampirkan <b>bukti pendaftaran ke universitas yang dituju</b>.
+        <br/>3. <b>Pemohon dengan masa penempatan kurang dari 4 (empat) tahun</b>
+        <br/> Legalisir Ijazah dan transkrip hanya akan diberikan sebanyak 2 lembar dan melampirkan <b>surat permohonan izin belajar yang disetujui oleh eselon II dan Kepala Pusdiklat BPS</b>.
+        <br/> Pemohon belum dapat mengajukan translasi ke Bahasa Inggris.
+        <br/>4. Untuk pemohon lulusan Tugas Belajar Polstat STIS, tahun penempatan dihitung dari tahun lulus Tugas Belajar Polstat STIS, bukan dari tahun pengangkatan CPNS.Untuk pemohon lulusan Tugas Belajar Polstat STIS, tahun penempatan dihitung dari tahun lulus Tugas Belajar Polstat STIS, bukan dari tahun pengangkatan CPNS.
+        <br/>5. Kelengkapan permohonan yang telah sesuai akan diproses lebih lanjut selama kurang lebih 6 hari kerja terhitung dari waktu pemohon mengajukan permohonan.
+        <br/>6. Opsi pengambilan dapat dilakukan melalui:
+        <br/> a. Unduh pada sistem
+        <br/> b. Diambil langsung ke kampus Politeknik Statistika STIS oleh pemohon
+        <br/> c. Diambil langsung ke kampus Politeknik Statistika STIS oleh perwakilan dibuktikan dengan surat kuasa
+        <br/> d. Dikirim dengan pos
+        <br/>7. Pemohon yang telah menerima dokumen harus mengkonfirmasi penerimaan dokumen agar dapat mengajukan permohonan lainnya di kemudian hari.
+
         </div>
 
         <div class="box-footer clearfix">

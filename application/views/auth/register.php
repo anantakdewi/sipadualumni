@@ -28,11 +28,11 @@
 <body class="hold-transition register-page">
 <div class="register-box">
   <div class="register-logo">
-    <b>SIPADU</b>Alumni
+    <b>SIPADU</b> ALUMNI
   </div>
 
   <div class="register-box-body">
-    <p class="login-box-msg">Membuat akun baru</p>
+    <p class="login-box-msg">Buat akun baru</p>
 
     <form action="<?php echo base_url() ?>auth/reg_action" method="post" autocomplete="off">
       <div class="form-group has-feedback">
@@ -51,7 +51,7 @@
         <?php echo form_error('password', '<small class="text-danger pl-3">', '</small>');?>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" name="repassword" class="form-control" placeholder="Retype password">
+        <input type="password" name="repassword" class="form-control" placeholder="Konfirmasi password">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
         <?php echo form_error('repassword', '<small class="text-danger pl-3">', '</small>');?>
       </div>
@@ -76,9 +76,9 @@
 
       <!-- <div class="input-group date"> -->
 
-        <input type="text" name="tahun_penempatan" class="form-control" id="datepicker" placeholder="Tahun Pengangkatan" value="<?php echo set_value('tgl_tempat')?>">
+        <input type="text" name="tahun_lulus" class="form-control" id="datepicker" placeholder="Tahun Lulus" value="<?php echo set_value('tahun_lulus')?>">
         <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
-        <?php echo form_error('tahun_penempatan', '<small class="text-danger pl-3">', '</small>');?>
+        <?php echo form_error('tahun_lulus', '<small class="text-danger pl-3">', '</small>');?>
       <!-- </div> -->
       <!-- /.input group -->
 
@@ -88,20 +88,20 @@
         <div class="col-xs-8">
           <div class="checkbox icheck">
             <label>
-              <input type="checkbox"> I agree to the <a href="#">terms</a>
+              <input type="checkbox"> Saya setuju dengan <a href="#">S&K</a>
             </label>
           </div>
         </div>
         <!-- /.col -->
         <div class="col-xs-4">
-          <button type="submit" name="register" class="btn btn-primary btn-block btn-flat">Register</button>
+          <button type="submit" name="register" class="btn btn-primary btn-block btn-flat">Daftar</button>
         </div>
         <!-- /.col -->
       </div>
     </form>
 
 
-    <a href="<?php echo base_url('index.php/auth/login') ?>" class="text-center">I already have a membership</a>
+    <a href="<?php echo base_url('index.php/auth/login') ?>" class="text-center">Saya sudah punya akun</a>
   </div>
   <!-- /.form-box -->
 </div>

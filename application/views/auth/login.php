@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Log in</title>
+  <title>SIPADU ALUMNI | Login</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
@@ -27,15 +27,15 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="../../index2.html"><b>Admin</b>LTE</a>
+    <a href="../../index2.html"><b>SIPADU</b> ALUMNI</a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <p class="login-box-msg">Sign in to start your session</p>
+    <p class="login-box-msg">Login Alumni</p>
     
     <?php echo $this->session->flashdata('message');?>
 
-    <form action="<?php echo base_url() ?>index.php/auth/login" method="post">
+    <form action="<?php echo base_url('auth/login') ?>" method="post">
       <div class="form-group has-feedback">
         <input type="email" class="form-control" name="email" placeholder="Email" value="<?php echo set_value('email')?>">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
@@ -56,14 +56,14 @@
         </div>
         <!-- /.col -->
         <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+          <button type="submit" class="btn btn-primary btn-block btn-flat">Login</button>
         </div>
         <!-- /.col -->
       </div>
     </form>
 
   
-    <a href="<?php echo base_url('index.php/auth/register') ?>" class="text-center">Register a new membership</a>
+    <a href="<?php echo base_url('index.php/auth/register') ?>" class="text-center">Buat akun baru</a>
 
   </div>
   <!-- /.login-box-body -->

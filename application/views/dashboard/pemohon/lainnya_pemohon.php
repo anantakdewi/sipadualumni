@@ -4,6 +4,8 @@
         <div class="box">
         <div class="box-header with-border">
             <h3 class="box-title">Pengambilan</h3>
+                </br></br>Pemohon yang dapat mengajukan surat permohonan lainnya adalah alumni dengan masa penempatan minimal 4 tahun.
+                </br>
 
             <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>

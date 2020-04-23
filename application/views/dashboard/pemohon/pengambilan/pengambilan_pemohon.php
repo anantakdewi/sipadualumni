@@ -14,7 +14,18 @@
         </div>
         <!-- /.box-header -->
         <div class="box-body">
-         
+        1. Pengambilan ijazah dan transkrip asli hanya bisa dilakukan dengan cara diambil di kampus Politeknik Statistika STIS langsung oleh pemohon atau oleh orang lain yang telah diberi kuasa. 
+        </br>2. Untuk alumni yang telah menyelesaikan masa Ikatan Dinas (ID):
+        </br><b>Surat Keterangan (SK) masih bekerja di BPS</b> yang mengetahui (tanda tangan) 
+        </br>minimal eselon III
+        </br>Surat Kuasa bila pengambilan dikuasakan/diwakilkan
+        </br>3. Untuk alumni yang belum menyelesaikan masa Ikatan Dinas (ID):
+        </br><b>Bukti Asli pembayaran tuntutan ganti rugi (TGR) dari Kementerian Keuangan</b>   
+        </br><b>Materai Rp.6000,-</b>
+        </br>Surat Kuasa bila pengambilan dikuasakan/diwakilkan
+        </br>4. Pemohon memilih maksimal 5 hari kerja sebelum tanggal pengambilan misalnya, pemohon yang akan mengambil ijazah asli di tanggal 10 maka harus mengkonfirmasi paling lambat tanggal 5.
+        </br>5. Pemohon yang telah menerima dokumen harus mengkonfirmasi penerimaan dokumen agar dapat mengajukan permohonan lainnya di kemudian hari.
+
         </div>
 
         <div class="box-footer clearfix">

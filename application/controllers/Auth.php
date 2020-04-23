@@ -63,7 +63,7 @@ class Auth extends CI_Controller {
         $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email');
         $this->form_validation->set_rules('password', 'Password', 'required|trim|min_length[8]');
         $this->form_validation->set_rules('repassword', 'Password Confirmation', 'required|trim|matches[password]');
-        $this->form_validation->set_rules('nip', 'NIP', 'required|trim|max_length[20]');
+        $this->form_validation->set_rules('nip', 'NIP', 'required|trim|max_length[21]');
         $this->form_validation->set_rules('instansi', 'Instansi', 'required|trim|max_length[100]');
         $this->form_validation->set_rules('tahun_lulus', 'Tahun Lulus', 'required|trim');
 
