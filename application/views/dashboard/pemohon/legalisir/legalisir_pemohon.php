@@ -47,14 +47,14 @@
 
         <div class="box-body">
             
+            <?php foreach($buttons as $button){
+                echo '<a href='.base_url("pemohon/legalisir/download/$button->id").' class="btn btn-lg btn-primary btn-block" style="margin-bottom: 10px">'.$button->nama_dokumen.'</a>';
 
-            <a href="" class="btn btn-lg btn-primary btn-block" style="margin-bottom: 10px">Surat Permohonan Legalisir</a>
-            <a href="" class="btn btn-lg btn-primary btn-block" style="margin-bottom: 10px">Surat Permohonan Izin Belajar (Eselon II)</a>
-            <a href="" class="btn btn-lg btn-primary btn-block" style="margin-bottom: 10px">Surat Permohonan Izin Belajar (Kepala Pusdiklat)</a>
-            <a href="" class="btn btn-lg btn-primary btn-block" style="margin-bottom: 10px">Surat Permohonan Izin Belajar</a>
-            <a href="" class="btn btn-lg btn-primary btn-block" style="margin-bottom: 10px">Surat Kuasa</a>
-        
+            }
+            ?>
         </div>
+
+       
         <!-- ./box-body -->
 
     </div>

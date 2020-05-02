@@ -75,13 +75,17 @@ class Auth extends CI_Controller {
             $email = htmlspecialchars($this->input->post('email', true));
             $password = password_hash($this->input->post('password'), PASSWORD_BCRYPT);
             // $repassword = $this->input->post('repassword');
-            $nip = $this->input->post('nip');
+            $nip_kasar = $this->input->post('nip');
             $instansi = $this->input->post('instansi');
             $tahun_lulus = $this->input->post('tahun_lulus');
 
             // if ($password != $repassword) {`
             //     echo "Password tidak sama.";
             // }else{
+            
+            $nip = str_replace(' ', '', $nip_kasar);
+            
+            // die($nip);
 
             $data = array(
                 'nama'=>$nama,
@@ -107,7 +111,7 @@ class Auth extends CI_Controller {
 
     public function login()
         {
-            $this->form_validation->set_rules('email', "Email", 'required|trim|max_length[150]|valid_email');
+            $this->form_validation->set_rules('email', 'Email', 'required|trim|max_length[150]|valid_email');
             $this->form_validation->set_rules('password', 'Password', 'required|trim|min_length[8]');
 
             if($this->form_validation->run() == false){
@@ -127,6 +131,22 @@ class Auth extends CI_Controller {
                         // jika sudah di verifikasi
                         
                         if(password_verify($password, $alumni['password'])){
+
+                            
+                            //proses cek tahun pengangkatan
+                            $arr = str_split($alumni['nip'], 1);
+
+                            $thAngkat = '';
+
+                            for ($i=8; $i <= 11; $i++) { 
+                                $thAngkat = $thAngkat . $arr[$i];
+                            }
+
+                            $thNow = date('Y');
+                            $selisih =  $thNow - $thAngkat;
+
+                            // if($thAngkat )
+
                             // jika password benar
                             $user_data = [
                                 'id' => $alumni['id'],
@@ -134,9 +154,12 @@ class Auth extends CI_Controller {
                                 'nama' => $alumni['nama'],
                                 'nip' => $alumni['nip'],
                                 'role_id' => $alumni['role_id'],
+                                'tahun_abdi' => $selisih."",
                             ];
 
                             $this->session->set_userdata($user_data);
+
+                            
 
                             redirect(base_url('pemohon/dashboard'));
                             
@@ -148,7 +171,7 @@ class Auth extends CI_Controller {
                             '<div class="alert alert-danger" role="alert">
                             Email dan Password tidak cocok!</div>');
                             
-                            redirect(base_url('auth/login'));
+                            $this->load->view('auth/login');
 
                         }
                         
@@ -158,7 +181,7 @@ class Auth extends CI_Controller {
                         '<div class="alert alert-danger" role="alert">
                         Email belum terverifikasi!, mohon cek inbox email anda dan segera verifikasi </div>');
 
-                        redirect(base_url('auth/login'));
+                        $this->load->view('auth/login');
                         
                     }
                     
@@ -168,7 +191,7 @@ class Auth extends CI_Controller {
                     '<div class="alert alert-danger" role="alert">
                     Email tidak terdaftar! </div>');
 
-                    redirect(base_url('auth/login'));
+                    $this->load->view('auth/login');
                 }
 
             }
