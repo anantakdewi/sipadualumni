@@ -66,5 +66,25 @@
     });
 </script>
 
+
+<!-- Script untuk pengambilan pengajuan -->
+<script>
+$(function () {
+  var dNow = new Date();
+  var dateStart = new Date(dNow.setDate(dNow.getDate() + 7));
+
+  $("#datepickerPengambilan").datepicker({
+    dateFormat: 'yy-mm-dd ',
+    startDate : dateStart,
+    autoclose : true,
+    daysOfWeekDisabled: [0, 6]
+  })
+
+});
+
+</script>
+
+
+
 </body>
 </html>

@@ -45,4 +45,59 @@ class pengambilan_pemohon extends CI_Controller {
         $this->load->view('dashboard/pemohon/pengambilan/pengambilan_pengajuan');
         $this->load->view('dashboard/template/dashboard_footer');
     }
+
+    public function postForm()
+    {
+        //load DB Model
+        $this->load->model('Permohonan');
+
+        $this->form_validation->set_rules('pengambilan_dokumen','Pengambilan Dokumen','required');
+        $this->form_validation->set_rules('tgl_pengambilan','Tanggal Pengambilan','required');
+
+        if($this->form_validation->run() == false){
+            $this->showForm();
+        } else {
+
+            $pengambilan = htmlspecialchars($this->input->post('pengambilan_dokumen', true));
+            $tgl = htmlspecialchars($this->input->post('tgl_pengambilan', true));
+            $tgl_kasar = strtotime($tgl);
+            $tgl_pengambilan = date('Y-m-d',$tgl_kasar);
+
+            try {
+                
+                $arr_permohonan = array(
+                    'user_id' => $this->session->userdata('id'),
+                    'alamat_id' => NULL,
+                    'jenis_permohonan' => 2,
+                    'jenis_pengambilan' => $pengambilan,
+                    'resi' => NULL,
+                    'status' => 1,
+                    'read' => 0,
+                    'tgl_ambil' => $tgl_pengambilan,
+                    'created_at' => date("Y-m-d H:i:s")
+                );
+
+
+                if($this->Permohonan->insert($arr_permohonan)){
+                    
+                    $this->session->set_flashdata('message', 
+                    '<div class="alert alert-success" role="alert">
+                    Permohonan berhasil diajukan!</div>');
+
+                    redirect(base_url('pemohon/pengambilan'));
+                }
+
+                // print "<pre>";
+                // print_r($arr_permohonan);
+                // print "<pre>";
+                // die();
+                
+            } catch (\Exception $e) {
+                die($e->getMassage());
+            }
+
+        }
+
+    }
+
 }

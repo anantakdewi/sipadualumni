@@ -79,4 +79,8 @@ $route['pemohon/legalisir/submit'] = 'pemohon/legalisir_pemohon/postForm';
 
 // Pengambilan Pemohon
 $route['pemohon/pengambilan/pengajuan'] = 'pemohon/pengambilan_pemohon/showForm';
+$route['pemohon/pengambilan/submit'] = 'pemohon/pengambilan_pemohon/postForm';
+
+    //Download Surat
+    $route['pemohon/legalisir/download/:any'] = 'pemohon/legalisir_pemohon/downloadSurat/';
 

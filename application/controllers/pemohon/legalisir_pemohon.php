@@ -96,6 +96,42 @@ class legalisir_pemohon extends CI_Controller {
                 $kodePos = NULL;
             }
 
+            
+            try {
+                
+                if($alamat != NULL){
+                    $arr_alamat = array(
+                        'user_id' => $this->session->userdata('id'),
+                        'alamat' => $alamat,
+                        'prov' => $provinsi,
+                        'kabkot' => $kabupaten,
+                        'kode_pos' => $kodePos,
+                        'created_at' => date("Y-m-d H:i:s"),
+                        );
+
+                    $id_alamat = $this->Alamat->insert($arr_alamat);
+                } else {
+                    $id_alamat = NULL;
+                }
+
+                $arr_permohonan = array(
+                    'user_id' => $this->session->userdata('id'),
+                    'alamat_id' => $id_alamat,
+                    'jenis_permohonan' => 1,
+                    'jenis_pengambilan' => $metodePengambilan,
+                    'resi' => NULL,
+                    'status' => 1,
+                    'read' => 0,
+                    'tgl_ambil' => NULL,
+                    'created_at' => date("Y-m-d H:i:s"),
+                    'updated_at' => NULL,
+                );
+                
+                $id_permohonan = $this->Permohonan->insert($arr_permohonan);
+
+            } catch (\Exception $e) {
+                die($e->getMessage());
+            }
 
             //jika mengabdi diatas 4 tahun
             if($this->session->userdata('tahun_abdi') >= 4){
@@ -104,39 +140,10 @@ class legalisir_pemohon extends CI_Controller {
                 
                 $arr_var_gambar = array('surat_permohonan_legalisir','surat_bukti_daftar_univ');
                 
+                
                 if($upload_img){
 
                     try {
-                        
-                        if($alamat != NULL){
-                            $arr_alamat = array(
-                                'user_id' => $this->session->userdata('id'),
-                                'alamat' => $alamat,
-                                'prov' => $provinsi,
-                                'kabkot' => $kabupaten,
-                                'kode_pos' => $kodePos,
-                                'created_at' => date("Y-m-d H:i:s"),
-                                );
-
-                            $id_alamat = $this->Alamat->insert($arr_alamat);
-                        } else {
-                            $id_alamat = NULL;
-                        }
-    
-                        $arr_permohonan = array(
-                            'user_id' => $this->session->userdata('id'),
-                            'alamat_id' => $id_alamat,
-                            'jenis_permohonan' => 1,
-                            'jenis_pengambilan' => $metodePengambilan,
-                            'resi' => NULL,
-                            'status' => 1,
-                            'read' => 0,
-                            'tgl_ambil' => NULL,
-                            'created_at' => date("Y-m-d H:i:s"),
-                            'updated_at' => NULL,
-                        );
-                        
-                        $id_permohonan = $this->Permohonan->insert($arr_permohonan);
 
                         //cek direktori
                         if(!is_dir('assets/documents/'.date("Y").'/'.date("M").'/')){
@@ -150,6 +157,7 @@ class legalisir_pemohon extends CI_Controller {
 
                         $this->load->library('upload', $config);
                         $this->upload->initialize($config);
+                        
 
                         $i = 0;
                         foreach($upload_img as $img){
@@ -190,6 +198,69 @@ class legalisir_pemohon extends CI_Controller {
                     redirect(base_url('pemohon/legalisir'));
                 }
 
+            } else if($this->session->userdata('tahun_abdi') < 4){
+
+                $upload_img = array($_FILES['surat_permohonan_legalisir'], $_FILES['surat_izin_eselon_2'], $_FILES['surat_izin_pusdiklat']);
+                
+                $arr_var_gambar = array('surat_permohonan_legalisir','surat_izin_eselon_2','surat_izin_pusdiklat');
+                
+                
+                if($upload_img){
+
+                    try {
+
+                        //cek direktori
+                        if(!is_dir('assets/documents/'.date("Y").'/'.date("M").'/')){
+                            mkdir('./assets/documents/'.date("Y").'/'.date("M").'/',0777,TRUE);
+                        }
+                        
+                        $config['upload_path']          = './assets/documents/'.date("Y").'/'.date("M").'/';
+                        $config['allowed_types']        = 'jpg|jpeg|png|pdf|doc|docx';
+                        $config['max_size']             = 2048;
+                        $config['file_name']            = time();
+
+                        $this->load->library('upload', $config);
+                        $this->upload->initialize($config);
+                        
+
+                        $i = 0;
+                        foreach($upload_img as $img){
+
+                            if(!$this->upload->do_upload($arr_var_gambar[$i])){
+                                $error = $this->upload->display_errors();
+                                die($error);
+                            } else{
+                                $details = $this->upload->data();
+                            }
+
+
+                            $surat = array(
+                                'permohonan_id' => $id_permohonan,
+                                'path' => $details['full_path'],
+                                'status' => 1,
+                                'created_at' => date("Y-m-d H:i:s"),
+                            );
+
+                            $this->Surat->insert($surat);
+                        
+                            $i++;
+                        }
+
+                        // print "<pre>";
+                        // print_r($img);
+                        // print "<pre>";
+                        // die();
+                    } catch (\Exception  $e) {
+                        die($e->getMessage());
+                    }
+
+                    $this->session->set_flashdata('message', 
+                    '<div class="alert alert-success" role="alert">
+                    Permohonan berhasil diajukan!</div>');
+
+                    redirect(base_url('pemohon/legalisir'));
+                    
+                }
             }
         }
     }
