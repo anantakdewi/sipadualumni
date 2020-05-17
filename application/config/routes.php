@@ -74,6 +74,15 @@ $route['pemohon/lainnya'] = 'pemohon/dashboard_pemohon/lainnya';
 
 // Legalisir Pemohon
 $route['pemohon/legalisir/pengajuan'] = 'pemohon/legalisir_pemohon/showForm';
+$route['pemohon/legalisir/submit'] = 'pemohon/legalisir_pemohon/postForm';
+
+//Download Surat
+$route['pemohon/legalisir/download/:any'] = 'pemohon/legalisir_pemohon/downloadSurat/';
+
 
 // Pengambilan Pemohon
 $route['pemohon/pengambilan/pengajuan'] = 'pemohon/pengambilan_pemohon/showForm';
+$route['pemohon/pengambilan/submit'] = 'pemohon/pengambilan_pemohon/postForm';
+
+//Download Surat
+$route['pemohon/legalisir/download/:any'] = 'pemohon/legalisir_pemohon/downloadSurat/';

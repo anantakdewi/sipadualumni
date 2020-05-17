@@ -72,8 +72,13 @@ class dashboard_pemohon extends CI_Controller
             'small_title' => 'Legalisir',
         );
 
+        // get data button download
+        $query = $this->db->query("SELECT * FROM master_dokumen WHERE jenis_dokumen = 'Legalisir' AND `status` = 1;");
+
+        $buttonSurat = array('buttons' => $query->result());
+
         $this->load->view('dashboard/template/dashboard_header', $data);
-        $this->load->view('dashboard/pemohon/legalisir/legalisir_pemohon');
+        $this->load->view('dashboard/pemohon/legalisir/legalisir_pemohon', $buttonSurat);
         $this->load->view('dashboard/template/dashboard_footer');
     }
 
@@ -105,8 +110,17 @@ class dashboard_pemohon extends CI_Controller
             'small_title' => 'Permohonan Lainnya',
         );
 
-        $this->load->view('dashboard/template/dashboard_header', $data);
-        $this->load->view('dashboard/pemohon/lainnya_pemohon');
-        $this->load->view('dashboard/template/dashboard_footer');
+        if ($this->session->userdata('tahun_abdi') < 4) {
+
+            $this->load->view('dashboard/template/dashboard_header', $data);
+            $this->load->view('dashboard/error/error_tahun_abdi');
+            $this->load->view('dashboard/template/dashboard_footer');
+        } else {
+
+
+            $this->load->view('dashboard/template/dashboard_header', $data);
+            $this->load->view('dashboard/pemohon/lainnya_pemohon');
+            $this->load->view('dashboard/template/dashboard_footer');
+        }
     }
 }

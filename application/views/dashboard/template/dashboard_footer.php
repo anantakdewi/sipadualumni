@@ -48,5 +48,43 @@
     });
 </script>
 
+
+<!-- script untuk legalisir pengajuan -->
+<script>
+    $('#pengambilan_dokumen').on('change', function(){
+        if ($(this).val() != '4'){
+          $("#alamat_pos").prop("disabled", true);
+          $("#provinsi").prop("disabled", true);
+          $("#kabupaten").prop("disabled", true);
+          $("#kode_pos").prop("disabled", true);
+        } else {
+          $("#alamat_pos").prop("disabled", false);
+          $("#provinsi").prop("disabled", false);
+          $("#kabupaten").prop("disabled", false);
+          $("#kode_pos").prop("disabled", false);
+        }
+    });
+</script>
+
+
+<!-- Script untuk pengambilan pengajuan -->
+<script>
+$(function () {
+  var dNow = new Date();
+  var dateStart = new Date(dNow.setDate(dNow.getDate() + 7));
+
+  $("#datepickerPengambilan").datepicker({
+    dateFormat: 'yy-mm-dd ',
+    startDate : dateStart,
+    autoclose : true,
+    daysOfWeekDisabled: [0, 6]
+  })
+
+});
+
+</script>
+
+
+
 </body>
 </html>

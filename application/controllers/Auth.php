@@ -69,13 +69,17 @@ class Auth extends CI_Controller
             $email = htmlspecialchars($email);
             $password = password_hash($this->input->post('password'), PASSWORD_BCRYPT);
             // $repassword = $this->input->post('repassword');
-            $nip = $this->input->post('nip');
+            $nip_kasar = $this->input->post('nip');
             $instansi = $this->input->post('instansi');
             $tahun_lulus = $this->input->post('tahun_lulus');
 
             // if ($password != $repassword) {`
             //     echo "Password tidak sama.";
             // }else{
+
+            $nip = str_replace(' ', '', $nip_kasar);
+
+            // die($nip);
 
             $data = array(
                 'nama' => $nama,
@@ -228,6 +232,22 @@ class Auth extends CI_Controller
                     // jika sudah di verifikasi
 
                     if (password_verify($password, $alumni['password'])) {
+
+
+                        //proses cek tahun pengangkatan
+                        $arr = str_split($alumni['nip'], 1);
+
+                        $thAngkat = '';
+
+                        for ($i = 8; $i <= 11; $i++) {
+                            $thAngkat = $thAngkat . $arr[$i];
+                        }
+
+                        $thNow = date('Y');
+                        $selisih =  $thNow - $thAngkat;
+
+                        // if($thAngkat )
+
                         // jika password benar
                         $user_data = [
                             'id' => $alumni['id'],
@@ -235,6 +255,7 @@ class Auth extends CI_Controller
                             'nama' => $alumni['nama'],
                             'nip' => $alumni['nip'],
                             'role_id' => $alumni['role_id'],
+                            'tahun_abdi' => $selisih . "",
                         ];
 
                         $this->session->set_userdata($user_data);
@@ -252,7 +273,7 @@ class Auth extends CI_Controller
                             Email dan password tidak cocok!</div>'
                         );
 
-                        redirect(base_url('auth/login'));
+                        $this->load->view('auth/login');
                     }
                 } else {
                     // jika belum di verifikasi
@@ -262,7 +283,7 @@ class Auth extends CI_Controller
                         Akun belum terverifikasi! Mohon cek inbox email anda dan segera verifikasi.</div>'
                     );
 
-                    redirect(base_url('auth/login'));
+                    $this->load->view('auth/login');
                 }
             } else {
                 // jika tidak ada email
