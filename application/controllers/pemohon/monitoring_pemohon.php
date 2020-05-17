@@ -30,4 +30,16 @@ class monitoring_pemohon extends CI_Controller
 			redirect((base_url('auth/login')));
 		};
 	}
+
+	public function monitoring()
+	{
+		$this->db->select('permohonan.jenis_permohonan, permohonan.nama_permohonan, progress.created_at, progress.status, progress.komentar');
+		$this->db->from('progress');
+		$this->db->join('permohonan', 'progress.permohonan_id = permohonan.id');
+		$this->db->where('progress.user_id', $this->session->userdata('id'));
+		$this->db->where('permohonan.status !=', 4);
+		$query = $this->db->get();
+
+		var_dump($query->getResult());
+	}
 }

@@ -14,86 +14,138 @@
         </div>
         <!-- /.box-header -->
         <div class="box-body">
-            <ul class="timeline">
+            
             <!-- Timeline dari atas ke bawah -->
 
-                <!-- timeline time label -->
-                <li class="time-label">
-                    <span class="bg-green">
-                        10 Feb. 2014
-                    </span>
-                </li>
-                <!-- timeline time label end -->
+            <?php 
 
-                <!-- timeline item -->
-                <li>
-                    <!-- timeline icon -->
-                    <i class="fa fa-envelope bg-green"></i>
-                    <div class="timeline-item">
+                if(!empty($queries)){
 
-                        <h3 class="timeline-header bg-green">Permohonan diterima</h3>
+                    echo '<ul class="timeline">';
 
-                        <div class="timeline-body">
-                            <a class="btn btn-success btn-sm">Surat sudah diajukan</a>
-                        </div>
+                    foreach($queries as $query){
 
-                    </div>
-                </li>
+                        if($query['status'] == 1){
+    
+                            echo('
+    
+                            <li class="time-label">
+                                <span class="bg-green">'
+                                . date('j M. Y', strtotime($query['created_at'])) .
+                                '</span>
+                            </li>
+    
+                            <li>
+                                <!-- timeline icon -->
+                                <i class="fa fa-envelope bg-green"></i>
+                                <div class="timeline-item">
+            
+                                    <h3 class="timeline-header bg-green">Permohonan diterima</h3>
+            
+                                    <div class="timeline-body">
+                                        Surat sudah diajukan
+                                    </div>
+            
+                                </div>
+                            </li>
+        
+                            ');
+                        }
+    
+                        else if($query['status'] == 2){
+                            echo('
+                            
+                            <li class="time-label">
+                                <span class="bg-blue">'
+                                . date('j M. Y', strtotime($query['created_at'])) .
+                                '</span>
+                            </li>
+    
+                            <li>
+                                <!-- timeline icon -->
+                                <i class="fa fa-envelope bg-blue"></i>
+                                <div class="timeline-item">
+    
+                                    <h3 class="timeline-header bg-blue">Permohonan sedang diproses</h3>
+    
+                                    <div class="timeline-body">
+                                        <!-- progress description -->
+    
+                                       Permohonan Sedang di proses
+    
+                                    </div>
+                                </div>
+                            </li>
+                            
+                            ');
+                        } else if($query['status'] == 3){
+    
+                            echo('
+                            
+                            <li class="time-label">
+                                <span class="bg-red">'
+                                . date('j M. Y', strtotime($query['created_at'])) .
+                                '</span>
+                            </li>
+    
+                            <li>
+                                <!-- timeline icon -->
+                                <i class="fa fa-envelope bg-red"></i>
+                                <div class="timeline-item">
+            
+                                    <h3 class="timeline-header bg-red">Permohonan Bermasalah</h3>
+            
+                                    <div class="timeline-body">
+                                        <!-- progress description -->
+            
+                                        Surat tidak Valid!
+            
+                                    </div>
+                                </div>
+                            </li>
+                                                    
+                            ');
+    
+    
+                        } else if($query['status'] == 4){
+    
+                            echo('
+    
+                            <li class="time-label">
+                                <span class="bg-green">'
+                                . date('j M. Y', strtotime($query['created_at'])) .
+                                '</span>
+                            </li>
+    
+                            <li>
+                                <!-- timeline icon -->
+                                <i class="fa fa-envelope bg-green"></i>
+                                <div class="timeline-item">
+            
+                                    <h3 class="timeline-header bg-green">Permohonan telah selesai</h3>
+            
+                                    <div class="timeline-body">
+                                       Permohonan telah dikirim melalui POS dengan Resi : 123810293103
+                                    </div>
+            
+                                </div>
+                            </li>
+        
+                            ');
+                        }
+                    }
 
-                <!-- timeline time label -->
-                <li class="time-label">
-                    <span class="bg-blue">
-                        11 Feb. 2014
-                    </span>
-                </li>
-                <li>
-                    <!-- timeline icon -->
-                    <i class="fa fa-envelope bg-blue"></i>
-                    <div class="timeline-item">
+                    echo '</ul>';
+                    
+                } else {
 
-                        <h3 class="timeline-header bg-blue">Permohonan sedang diproses</h3>
+                    echo '<center><h2>Anda tidak memiliki permohonan aktif</h2></center>';
 
-                        <div class="timeline-body">
-                            <!-- progress description -->
+                }
+            ?>
 
-                            <a class="btn btn-primary btn-sm">Sudah di serahkan ke bagian perizinan</a>
-
-                        </div>
-                    </div>
-                </li>
-
-                <li class="time-label">
-                    <span class="bg-red">
-                        13 Feb. 2014
-                    </span>
-                </li>
-                <li>
-                    <!-- timeline icon -->
-                    <i class="fa fa-envelope bg-red"></i>
-                    <div class="timeline-item">
-
-                        <h3 class="timeline-header bg-red">Permohonan Bermasalah</h3>
-
-                        <div class="timeline-body">
-                            <!-- progress description -->
-
-                            <a class="btn btn-danger btn-sm">Surat tidak Valid! </a>
-
-                        </div>
-                    </div>
-                </li>
-
-                
-                <!-- END timeline item -->
-
-                <!-- timeline label terbaru -->
-                <li class="time-label">
-                    <span class="bg-red">
-                        15 Feb. 2014
-                    </span>
-                </li>
                 <!-- timeline label terbaru end -->
-            </ul>
+            
         </div>
         <!-- ./box-body -->
         </div>
