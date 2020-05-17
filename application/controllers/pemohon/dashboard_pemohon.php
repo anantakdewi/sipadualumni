@@ -1,38 +1,38 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class dashboard_pemohon extends CI_Controller {
+class dashboard_pemohon extends CI_Controller
+{
 
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see https://codeigniter.com/user_guide/general/urls.html
-	 */
+    /**
+     * Index Page for this controller.
+     *
+     * Maps to the following URL
+     * 		http://example.com/index.php/welcome
+     *	- or -
+     * 		http://example.com/index.php/welcome/index
+     *	- or -
+     * Since this controller is set as the default controller in
+     * config/routes.php, it's displayed at http://example.com/
+     *
+     * So any other public methods not prefixed with an underscore will
+     * map to /index.php/welcome/<method_name>
+     * @see https://codeigniter.com/user_guide/general/urls.html
+     */
 
-    public function __construct() 
+    public function __construct()
     {
 
         parent::__construct();
         $this->load->library('form_validation');
 
-        if(is_null($this->session->userdata('email'))){
+        if (is_null($this->session->userdata('email'))) {
             redirect((base_url('auth/login')));
         };
-
     }
 
-	public function index()
-	{
+    public function index()
+    {
         // data for header
         $data = array(
             'nav_data' => 'dashboard',
@@ -41,9 +41,9 @@ class dashboard_pemohon extends CI_Controller {
             'small_title' => 'Halaman Utama',
         );
 
-        $this->load->view('dashboard/template/dashboard_header',$data);
+        $this->load->view('dashboard/template/dashboard_header', $data);
         $this->load->view('dashboard/pemohon/dashboard_pemohon');
-		$this->load->view('dashboard/template/dashboard_footer');
+        $this->load->view('dashboard/template/dashboard_footer');
     }
 
     public function monitoring()
@@ -75,7 +75,6 @@ class dashboard_pemohon extends CI_Controller {
         $this->load->view('dashboard/template/dashboard_header', $data);
         $this->load->view('dashboard/pemohon/legalisir/legalisir_pemohon');
         $this->load->view('dashboard/template/dashboard_footer');
-        
     }
 
     public function pengambilan()
@@ -92,9 +91,8 @@ class dashboard_pemohon extends CI_Controller {
         $this->load->view('dashboard/template/dashboard_header', $data);
         $this->load->view('dashboard/pemohon/pengambilan/pengambilan_pemohon');
         $this->load->view('dashboard/template/dashboard_footer');
-        
     }
-    
+
 
     public function lainnya()
     {
@@ -110,7 +108,5 @@ class dashboard_pemohon extends CI_Controller {
         $this->load->view('dashboard/template/dashboard_header', $data);
         $this->load->view('dashboard/pemohon/lainnya_pemohon');
         $this->load->view('dashboard/template/dashboard_footer');
-        
     }
-
 }

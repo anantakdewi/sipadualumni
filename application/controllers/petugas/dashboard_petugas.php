@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class pengambilan_pemohon extends CI_Controller
+class dashboard_petugas extends CI_Controller
 {
 
     /**
@@ -24,25 +24,37 @@ class pengambilan_pemohon extends CI_Controller
     {
 
         parent::__construct();
-        $this->load->library('form_validation');
 
-        if (is_null($this->session->userdata('email'))) {
-            redirect((base_url('auth/login')));
-        };
+        sudah_login();
     }
 
-    public function showForm()
+    public function index()
     {
-        // data for nav
+        // data for header
         $data = array(
-            'nav_data' => 'pengambilan',
-            'title' => 'Pengajuan Pengambilan Ijazah dan Transkrip Asli',
-            'breadcumb' => array('Pengambilan', 'Pengajuan'),
-            'small_title' => 'Pengajuan Pengambilan Ijazah',
+            'nav_data' => 'dashboard',
+            'title' => 'Dashboard Petugas',
+            'breadcumb' => '',
+            'small_title' => 'Halaman Utama',
+        );
+
+        $this->load->view('dashboard/template/dashboard_header2', $data);
+        $this->load->view('dashboard/petugas/dashboard_petugas');
+        $this->load->view('dashboard/template/dashboard_footer');
+    }
+
+    public function monitoring()
+    {
+        // data for active nav
+        $data = array(
+            'nav_data' => 'monitoring',
+            'title' => 'Monitoring',
+            'breadcumb' => array('Monitoring'),
+            'small_title' => 'Monitoring',
         );
 
         $this->load->view('dashboard/template/dashboard_header', $data);
-        $this->load->view('dashboard/pemohon/pengambilan/pengambilan_pengajuan');
+        $this->load->view('dashboard/petugas/monitoring_petugas');
         $this->load->view('dashboard/template/dashboard_footer');
     }
 }
