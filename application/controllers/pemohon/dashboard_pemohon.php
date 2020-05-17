@@ -41,13 +41,21 @@ class dashboard_pemohon extends CI_Controller {
             'small_title' => 'Halaman Utama',
         );
 
+        $this->db->select('permohonan.jenis_permohonan, permohonan.nama_permohonan, progress.created_at, progress.status, progress.komentar');
+        $this->db->from('progress');
+        $this->db->join('permohonan', 'progress.permohonan_id = permohonan.id');
+        $this->db->where('progress.user_id',$this->session->userdata('id'));
+        $this->db->where('permohonan.status !=', 4);
+        $query['queries'] = $this->db->get()->result_array();
+
         $this->load->view('dashboard/template/dashboard_header',$data);
-        $this->load->view('dashboard/pemohon/dashboard_pemohon');
+        $this->load->view('dashboard/pemohon/dashboard_pemohon', $query);
 		$this->load->view('dashboard/template/dashboard_footer');
     }
 
     public function monitoring()
     {
+        
         // data for active nav
         $data = array(
             'nav_data' => 'monitoring',
@@ -56,8 +64,19 @@ class dashboard_pemohon extends CI_Controller {
             'small_title' => 'Monitoring',
         );
 
+        $this->db->select('permohonan.jenis_permohonan, permohonan.nama_permohonan, progress.created_at, progress.status, progress.komentar');
+        $this->db->from('progress');
+        $this->db->join('permohonan', 'progress.permohonan_id = permohonan.id');
+        $this->db->where('progress.user_id',$this->session->userdata('id'));
+        $this->db->where('permohonan.status !=', 4);
+        $query['queries'] = $this->db->get()->result_array();
+
+        // print "<pre>";
+        // var_dump(empty($query['queries']));
+        // die();
+
         $this->load->view('dashboard/template/dashboard_header', $data);
-        $this->load->view('dashboard/pemohon/monitoring_pemohon');
+        $this->load->view('dashboard/pemohon/monitoring_pemohon', $query);
         $this->load->view('dashboard/template/dashboard_footer');
     }
 

@@ -16,7 +16,7 @@
         </div>
         <!-- /.box-header -->
         <div class="box-body">
-            <form action="#" method="post">
+            <form action="<?php echo base_url('pemohon/lainnya/submit')?>" method="post" enctype="multipart/form-data">
 
             <div class="form-inline text-center">
 
@@ -56,10 +56,20 @@
             <br>
             <div class="form-group">
                 <label for="">Permohonan Lainnya</label>
-                <small class="text-danger">*Isikan disini jika tidak terdapat permohonan sesuai diatas</small>
-                <input type="text" name="" id="" class="form-control">
+                <sup class="text-danger">*Isikan disini jika tidak terdapat permohonan sesuai diatas</sup>
+                <input type="text" name="permohonan_lain" id="permohonan_lain" class="form-control">
                
             </div>
+
+            <div class="clearfix"></div>
+                <div class="form-group">
+                    <!-- <div class="col-md-" style="padding-left:0px;padding-bottom:15px"> -->
+                        <label for="input_file">Unggah Contoh Format Surat </label>
+                        <sup class="text-danger">*Jika ingin memberi contoh format (Opsional)</sup> 
+                        <input type="file" name="format_surat" class="form-control">
+                        <?php echo form_error('format_surat', '<small class="text-danger pl-3">', '</small>');?>
+                    <!-- </div> -->
+                </div>
 
             <div class="text-right">
                 <input type="submit" class="btn btn-primary" style="width:150px; margin-top:10px" value="Kirim">
