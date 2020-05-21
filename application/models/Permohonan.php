@@ -26,6 +26,20 @@ class Permohonan extends CI_Model
         return $this->db->get($tabel);
     }
 
+    // public function getActive($id)
+    // {
+    //     $this->db->select('count(id) as id');
+    //     $this->db->from($tabel);
+    //     $this->db->where('user_id', $id);
+    //     $this->db->where('status !=', 4);
+    //     $query = $this->db->get()->result_array();
+
+    //     var_dump($query[0]["id"]);
+    //     die();
+
+    //     return $query[0]["id"];
+    // }
+
 
 }
 

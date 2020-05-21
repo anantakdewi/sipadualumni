@@ -22,6 +22,10 @@
 <script>
   $.widget.bridge('uibutton', $.ui.button);
 </script>
+
+<!-- Pnotify -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.2.1/pnotify.js"></script>
+
 <!-- Bootstrap 3.3.6 -->
 <script src="<?php echo base_url() ?>assets/bootstrap/js/bootstrap.min.js"></script>
 <!-- bootstrap datepicker -->
@@ -34,6 +38,7 @@
 <script src="<?php echo base_url() ?>assets/dist/js/app.min.js"></script>
 <!-- iCheck 1.0.1 -->
 <script src="<?php echo base_url() ?>assets/plugins/iCheck/icheck.min.js"></script>
+
 
 <script>
     //Date picker
@@ -84,6 +89,36 @@ $(function () {
 
 </script>
 
+
+<!-- Script Pnotify -->
+<?php if($this->session->flashdata('alert')): ?>
+
+<script type="text/javascript">
+<?php $alert = $this->session->flashdata('alert'); ?>
+
+var title =  "<?php echo $alert['title'];?>";
+var type = "<?php echo $alert['type'];?>";
+var messages = "<?php echo $alert['messages'];?>";
+
+            function init_PNotify() {
+            if( typeof (PNotify) === 'undefined'){ return; }
+            new PNotify({
+              title: title,
+              type: type,
+              text: messages,
+              nonblock: {
+                  nonblock: true
+              },
+              styling: 'bootstrap3',
+              hide: true,
+              animation : 'fade',
+            });
+
+            };
+            init_PNotify();
+</script>
+
+<?php endif; ?>
 
 
 </body>

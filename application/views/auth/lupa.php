@@ -31,58 +31,18 @@
     <b>SIPADU</b> ALUMNI
     <h4>POLITEKNIK STATISTIKA STIS</h4>
   </div>
-
+  
   <div class="register-box-body">
-    <p class="login-box-msg">Buat Akun Baru</p>
+  
+    <p class="login-box-msg">Reset Password</p>
+    <?php echo $this->session->flashdata('message'); ?>
 
-    <form action="<?php echo base_url() ?>auth/reg_action" method="post" autocomplete="off">
-      <div class="form-group has-feedback">
-        <input type="text" name="nama" class="form-control" placeholder="Nama Lengkap" value="<?php echo set_value('nama')?>">
-        <span class="glyphicon glyphicon-user form-control-feedback"></span>
-        <?php echo form_error('nama', '<small class="text-danger pl-3">', '</small>');?>
-      </div>
+    <form action="<?php echo base_url() ?>auth/forgotPassword" method="post" autocomplete="off">
+      
       <div class="form-group has-feedback">
         <input type="text" name="email" class="form-control" placeholder="Email" value="<?php echo set_value('email')?>">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
         <?php echo form_error('email', '<small class="text-danger pl-3">', '</small>');?>
-      </div>
-      <div class="form-group has-feedback">
-        <input type="password" name="password" class="form-control" placeholder="Password">
-        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-        <?php echo form_error('password', '<small class="text-danger pl-3">', '</small>');?>
-      </div>
-      <div class="form-group has-feedback">
-        <input type="password" name="repassword" class="form-control" placeholder="Konfirmasi password">
-        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-        <?php echo form_error('repassword', '<small class="text-danger pl-3">', '</small>');?>
-      </div>
-      <div class="form-group has-feedback">
-        <input type="text" id="nip" name="nip" class="form-control" placeholder="NIP" value="<?php echo set_value('nip')?>">
-        <span class="glyphicon glyphicon-tag form-control-feedback"></span>
-        <?php echo form_error('nip', '<small class="text-danger pl-3">', '</small>');?>
-      </div>
-      <div class="form-group has-feedback">
-        <input type="text" name="instansi" class="form-control" placeholder="Instansi" value="<?php echo set_value('instansi')?>">
-        <span class="glyphicon glyphicon-briefcase form-control-feedback"></span>
-        <?php echo form_error('instansi', '<small class="text-danger pl-3">', '</small>');?>
-      </div>
-
-      
-      <!-- <div class="form-group has-feedback">
-        <input type="text" name="tgl_tempat" class="form-control" placeholder="Tanggal Penempatan">
-        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-      </div> -->
-
-      <div class="form-group has-feedback">
-
-      <!-- <div class="input-group date"> -->
-
-        <input type="text" name="tahun_lulus" class="form-control" id="datepicker" placeholder="Tahun Lulus" value="<?php echo set_value('tahun_lulus')?>">
-        <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
-        <?php echo form_error('tahun_lulus', '<small class="text-danger pl-3">', '</small>');?>
-      <!-- </div> -->
-      <!-- /.input group -->
-
       </div>
 
       <div class="row">
@@ -95,7 +55,7 @@
         </div>
         <!-- /.col -->
         <div class="col-xs-4">
-          <button type="submit" name="register" class="btn btn-primary btn-block btn-flat">Daftar</button>
+          <button type="submit" name="reset" class="btn btn-primary btn-block btn-flat">Reset</button>
         </div>
         <!-- /.col -->
       </div>

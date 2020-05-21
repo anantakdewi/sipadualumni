@@ -36,35 +36,40 @@
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
-      <p class="login-box-msg">Halaman Login Pengguna</p>
+      <p class="login-box-msg">Reset Password</p>
 
       <?php echo $this->session->flashdata('message'); ?>
 
-      <form action="<?php echo base_url('auth/login') ?>" method="post">
+      <form action="<?php echo base_url('auth/resetPasswordSubmit') ?>" method="post">
+
         <div class="form-group has-feedback">
-          <input type="email" class="form-control" name="email" placeholder="Email" value="<?php echo set_value('email') ?>">
-          <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-          <?php echo form_error('email', '<small class="text-danger pl-3">', '</small>'); ?>
+            <input type="text" name="email" class="form-control" placeholder="Email" value="<?php echo $email?>" readonly>
+            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
         </div>
+
         <div class="form-group has-feedback">
           <input type="password" class="form-control" name="password" placeholder="Password">
           <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           <?php echo form_error('password', '<small class="text-danger pl-3">', '</small>'); ?>
         </div>
+
+        <div class="form-group has-feedback">
+          <input type="password" class="form-control" name="repassword" placeholder="Confirm Password">
+          <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        </div>
+
         <div class="row">
-          <div class="col-xs-8">
+          <div class="col-xs-7">
 
           </div>
           <!-- /.col -->
-          <div class="col-xs-4">
-            <button type="submit" class="btn btn-primary btn-block btn-flat">Login</button>
+          <div class="col-xs-5">
+            <button type="submit" class="btn btn-primary btn-block btn-flat">Reset Password</button>
           </div>
           <!-- /.col -->
         </div>
       </form>
 
-      <a href="<?php echo base_url('auth/lupa') ?>" class="text-center">Lupa password</a><br>
-      <a href="<?php echo base_url('auth/register') ?>" class="text-center">Buat akun baru</a>
 
     </div>
     <!-- /.login-box-body -->

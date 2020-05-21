@@ -25,6 +25,8 @@ class pengambilan_pemohon extends CI_Controller
 
         parent::__construct();
         $this->load->library('form_validation');
+        
+        permohonanOnProgress($this->session->userdata('id'));
 
         if (is_null($this->session->userdata('email'))) {
             redirect((base_url('auth/login')));
@@ -80,11 +82,13 @@ class pengambilan_pemohon extends CI_Controller
 
                 if ($this->Permohonan->insert($arr_permohonan)) {
 
-                    $this->session->set_flashdata(
-                        'message',
-                        '<div class="alert alert-success" role="alert">
-                    Permohonan berhasil diajukan!</div>'
+                    $arr_flashdata = array(
+                        'type' => 'success',
+                        'title' => 'Success!',
+                        'messages' => 'Permohonan anda telah diajukan!',
                     );
+
+                    $this->session->set_flashdata('alert', $arr_flashdata);
 
                     redirect(base_url('pemohon/pengambilan'));
                 }

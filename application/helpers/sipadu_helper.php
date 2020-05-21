@@ -24,3 +24,50 @@ function sudah_login()
         }
     }
 }
+
+function permohonanOnProgress($id)
+{
+    $CI = &get_instance();
+    
+    // echo "<pre>";
+    // var_dump($ci->session->userdata('email'));
+    // die();
+    
+    $CI->db->select('count(id) as id');
+    $CI->db->from('permohonan');
+    $CI->db->where('user_id', $id);
+    $CI->db->where('status !=', 4);
+    $query = $CI->db->get()->result_array();
+
+    $count = $query[0]["id"];
+
+    // $count = $CI->permohonan->getActive($id);
+
+    if($count > 0){
+
+        $arr_flashdata = array(
+            'type' => 'notice',
+            'title' => 'Warning!',
+            'messages' => 'Anda masih memiliki permohonan aktif!',
+        );
+
+        $CI->session->set_flashdata('alert', $arr_flashdata);
+
+        redirect_back();
+        // die("ANDA MASIH MEMILIKI PERMOHONAN AKTIF");
+    }
+
+}
+
+function redirect_back()
+    {
+        if(isset($_SERVER['HTTP_REFERER']))
+        {
+            header('Location: '.$_SERVER['HTTP_REFERER']);
+        }
+        else
+        {
+            header('Location: http://'.$_SERVER['SERVER_NAME']);
+        }
+        exit;
+    }

@@ -26,6 +26,8 @@ class lainnya_pemohon extends CI_Controller
         parent::__construct();
         $this->load->library('form_validation');
 
+        permohonanOnProgress($this->session->userdata('id'));
+
         if (is_null($this->session->userdata('email'))) {
             redirect((base_url('auth/login')));
         };
@@ -131,6 +133,16 @@ class lainnya_pemohon extends CI_Controller
 
                 $this->Surat->insert($surat);
             }
+
+
+            $arr_flashdata = array(
+                'type' => 'success',
+                'title' => 'Success!',
+                'messages' => 'Permohonan anda telah diajukan!',
+            );
+
+            $this->session->set_flashdata('alert', $arr_flashdata);
+
             redirect(base_url('pemohon/lainnya'));
         }
     }

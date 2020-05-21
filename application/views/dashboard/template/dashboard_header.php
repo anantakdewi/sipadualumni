@@ -24,6 +24,8 @@
   <link rel="stylesheet" href="<?php echo base_url() ?>assets/plugins/iCheck/all.css">
   <!-- custom css -->
   <link rel="stylesheet" href="<?php echo base_url() ?>assets/custom_css/custom_style.css">
+  <!-- Pnotify -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.2.1/pnotify.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

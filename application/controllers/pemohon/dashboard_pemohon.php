@@ -41,6 +41,7 @@ class dashboard_pemohon extends CI_Controller
             'small_title' => 'Halaman Utama',
         );
 
+
         $this->db->select('permohonan.jenis_permohonan, permohonan.nama_permohonan, progress.created_at, progress.status, progress.komentar');
         $this->db->from('progress');
         $this->db->join('permohonan', 'progress.permohonan_id = permohonan.id');
