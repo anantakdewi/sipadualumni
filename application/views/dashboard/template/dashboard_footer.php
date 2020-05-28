@@ -1,16 +1,16 @@
 </section>
-    <!-- /.content -->
+<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+<footer class="main-footer">
+  <div class="pull-right hidden-xs">
+    <b>Version</b> 2.3.8
   </div>
-  <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <div class="pull-right hidden-xs">
-      <b>Version</b> 2.3.8
-    </div>
-    <strong>Copyright &copy; 2014-2016 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights
-    reserved.
-  </footer>
+  <strong>Copyright &copy; 2014-2016 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights
+  reserved.
+</footer>
 
- 
+
 </div>
 <!-- ./wrapper -->
 
@@ -22,6 +22,10 @@
 <script>
   $.widget.bridge('uibutton', $.ui.button);
 </script>
+
+<!-- Bootstrap WYSIHTML5 -->
+<script src="<?php echo base_url() ?>assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+
 
 <!-- Pnotify -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.2.1/pnotify.js"></script>
@@ -41,85 +45,94 @@
 
 
 <script>
-    //Date picker
-    $('#datepicker').datepicker({
-      autoclose: true
-    });
+  //Date picker
+  $('#datepicker').datepicker({
+    autoclose: true
+  });
 
-    //Flat red color scheme for iCheck
-    $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
-      checkboxClass: 'icheckbox_flat-green',
-      radioClass: 'iradio_flat-green'
-    });
+  //Flat red color scheme for iCheck
+  $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+    checkboxClass: 'icheckbox_flat-green',
+    radioClass: 'iradio_flat-green'
+  });
 </script>
 
 
 <!-- script untuk legalisir pengajuan -->
 <script>
-    $('#pengambilan_dokumen').on('change', function(){
-        if ($(this).val() != '4'){
-          $("#alamat_pos").prop("disabled", true);
-          $("#provinsi").prop("disabled", true);
-          $("#kabupaten").prop("disabled", true);
-          $("#kode_pos").prop("disabled", true);
-        } else {
-          $("#alamat_pos").prop("disabled", false);
-          $("#provinsi").prop("disabled", false);
-          $("#kabupaten").prop("disabled", false);
-          $("#kode_pos").prop("disabled", false);
-        }
-    });
+  $('#pengambilan_dokumen').on('change', function() {
+    if ($(this).val() != '4') {
+      $("#alamat_pos").prop("disabled", true);
+      $("#provinsi").prop("disabled", true);
+      $("#kabupaten").prop("disabled", true);
+      $("#kode_pos").prop("disabled", true);
+    } else {
+      $("#alamat_pos").prop("disabled", false);
+      $("#provinsi").prop("disabled", false);
+      $("#kabupaten").prop("disabled", false);
+      $("#kode_pos").prop("disabled", false);
+    }
+  });
 </script>
 
+<script>
+  $(function() {
+    $("#compose-textarea").wysihtml5();
+  });
+</script>
 
 <!-- Script untuk pengambilan pengajuan -->
 <script>
-$(function () {
-  var dNow = new Date();
-  var dateStart = new Date(dNow.setDate(dNow.getDate() + 7));
+  $(function() {
+    var dNow = new Date();
+    var dateStart = new Date(dNow.setDate(dNow.getDate() + 7));
 
-  $("#datepickerPengambilan").datepicker({
-    dateFormat: 'yy-mm-dd ',
-    startDate : dateStart,
-    autoclose : true,
-    daysOfWeekDisabled: [0, 6]
-  })
+    $("#datepickerPengambilan").datepicker({
+      dateFormat: 'yy-mm-dd ',
+      startDate: dateStart,
+      autoclose: true,
+      daysOfWeekDisabled: [0, 6]
+    })
 
-});
-
+  });
 </script>
 
 
 <!-- Script Pnotify -->
-<?php if($this->session->flashdata('alert')): ?>
+<?php if ($this->session->flashdata('alert')) : ?>
 
-<script type="text/javascript">
-<?php $alert = $this->session->flashdata('alert'); ?>
+  <script type="text/javascript">
+    <?php $alert = $this->session->flashdata('alert'); ?>
 
-var title =  "<?php echo $alert['title'];?>";
-var type = "<?php echo $alert['type'];?>";
-var messages = "<?php echo $alert['messages'];?>";
+    var title = "<?php echo $alert['title']; ?>";
+    var type = "<?php echo $alert['type']; ?>";
+    var messages = "<?php echo $alert['messages']; ?>";
 
-            function init_PNotify() {
-            if( typeof (PNotify) === 'undefined'){ return; }
-            new PNotify({
-              title: title,
-              type: type,
-              text: messages,
-              nonblock: {
-                  nonblock: true
-              },
-              styling: 'bootstrap3',
-              hide: true,
-              animation : 'fade',
-            });
+    function init_PNotify() {
+      if (typeof(PNotify) === 'undefined') {
+        return;
+      }
+      new PNotify({
+        title: title,
+        type: type,
+        text: messages,
+        nonblock: {
+          nonblock: true
+        },
+        styling: 'bootstrap3',
+        hide: true,
+        animation: 'fade',
+      });
 
-            };
-            init_PNotify();
-</script>
+    };
+    init_PNotify();
+  </script>
+
+
 
 <?php endif; ?>
 
 
 </body>
+
 </html>

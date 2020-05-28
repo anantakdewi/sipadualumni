@@ -24,22 +24,61 @@ class monitoring_petugas extends CI_Controller
     {
 
         parent::__construct();
+        $this->load->library('form_validation');
 
-        sudah_login();
+        permohonanOnProgress($this->session->userdata('id'));
+
+        if (is_null($this->session->userdata('email'))) {
+            redirect((base_url('auth/login')));
+        };
+
+        // $this->load->helper('sipadu');
+
     }
 
-    public function index()
+
+    public function lihatStatus()
     {
-        // data for header
+        // data for active nav
         $data = array(
-            'nav_data' => 'dashboard',
-            'title' => 'Monitoring Petugas',
-            'breadcumb' => '',
-            'small_title' => 'Halaman Utama',
+            'nav_data' => 'daftar permohonan',
+            'title' => 'Status Permohonan',
+            'breadcumb' => array('Daftar Permohonan', 'Status Permohonan'),
+            'small_title' => 'Status Permohonan',
         );
 
         $this->load->view('dashboard/template/dashboard_header2', $data);
-        $this->load->view('dashboard/petugas/dashboard_petugas');
+        $this->load->view('dashboard/petugas/monitoring/monitoring_read');
+        $this->load->view('dashboard/template/dashboard_footer');
+    }
+
+    public function dokumen()
+    {
+        // data for active nav
+        $data = array(
+            'nav_data' => 'permohonan sedang diproses',
+            'title' => 'Daftar Permohonan',
+            'breadcumb' => array('', ''),
+            'small_title' => 'Permohonan Sedang Diproses',
+        );
+
+        $this->load->view('dashboard/template/dashboard_header2', $data);
+        $this->load->view('dashboard/petugas/monitoring/monitoring_dokumen');
+        $this->load->view('dashboard/template/dashboard_footer');
+    }
+
+    public function format()
+    {
+        // data for active nav
+        $data = array(
+            'nav_data' => 'permohonan selesai',
+            'title' => 'Daftar Permohonan',
+            'breadcumb' => array('', ''),
+            'small_title' => 'Permohonan Selesai',
+        );
+
+        $this->load->view('dashboard/template/dashboard_header2', $data);
+        $this->load->view('dashboard/petugas/monitoring/monitoring_format');
         $this->load->view('dashboard/template/dashboard_footer');
     }
 }

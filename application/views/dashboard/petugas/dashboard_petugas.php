@@ -31,7 +31,7 @@
 
         <div class="row">
             <div class="col-md-5">
-                <a href="<?php echo base_url('dashboard/petugas/pengumuman') ?>" class="btn btn-primary btn-block margin-bottom">Tulis pengumuman baru</a>
+                <a href="<?php echo base_url('petugas/dashboard/pengumuman') ?>" class="btn btn-primary btn-block margin-bottom">Tulis pengumuman baru</a>
             </div>
         </div>
         <!-- /.box -->

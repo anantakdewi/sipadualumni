@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class dashboard_petugas extends CI_Controller
+class arsip_petugas extends CI_Controller
 {
 
     /**
@@ -28,35 +28,33 @@ class dashboard_petugas extends CI_Controller
         sudah_login();
     }
 
-    public function index()
+    public function dokumen()
     {
         // data for header
         $data = array(
-            'nav_data' => 'dashboard',
-            'title' => 'Dashboard Petugas',
+            'nav_data' => 'arsip',
+            'title' => 'Arsip',
             'breadcumb' => '',
-            'small_title' => 'Halaman Utama',
+            'small_title' => 'Arsip Ijazah dan Transkrip',
         );
 
         $this->load->view('dashboard/template/dashboard_header2', $data);
-        $this->load->view('dashboard/petugas/dashboard_petugas');
+        $this->load->view('dashboard/petugas/arsip/arsip_dokumen');
         $this->load->view('dashboard/template/dashboard_footer');
     }
 
-
-
-    public function postPengumuman()
+    public function surat()
     {
-        // data for active nav
+        // data for header
         $data = array(
-            'nav_data' => 'pengumuman',
-            'title' => 'Pengumuman',
-            'breadcumb' => array('Pengumuman'),
-            'small_title' => 'Pengumuman',
+            'nav_data' => 'arsip',
+            'title' => 'Arsip',
+            'breadcumb' => '',
+            'small_title' => 'Arsip Surat',
         );
 
         $this->load->view('dashboard/template/dashboard_header2', $data);
-        $this->load->view('dashboard/petugas/pengumuman_petugas');
+        $this->load->view('dashboard/petugas/arsip/arsip_surat');
         $this->load->view('dashboard/template/dashboard_footer');
     }
 }
