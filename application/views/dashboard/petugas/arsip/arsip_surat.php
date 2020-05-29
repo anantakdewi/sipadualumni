@@ -53,7 +53,7 @@
                                             <th scope="col">Nama Pemohon</th>
                                             <!-- nama pemohon -->
                                             <th scope="col">Keterangan</th>
-                                            <!-- buat langsung munculin print -->
+                                            <!-- buat langsung munculin print/save, kayak di tombol download surat-surat kelengkapan permohonan legalisir -->
                                         </tr>
                                     </thead>
                                     <tbody>
