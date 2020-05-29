@@ -29,10 +29,12 @@
 <body class="hold-transition login-page">
   <div class="login-box">
     <div class="login-logo">
-      <a href="../../index2.html">
-        <h1><b>SIPADU</b> ALUMNI</h1>
-      </a>
+      <img src="../assets/dist/img/up.png" class="rounded-center" width="100x">
+      <br>
+      <h1><b>SIPADU</b> ALUMNI</h1>
+
       <h4>POLITEKNIK STATISTIKA STIS</h4>
+
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
