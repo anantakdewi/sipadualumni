@@ -54,7 +54,7 @@
                                             <th scope="col">Prodi</th>
                                             <th scope="col">Tahun Lulus</th>
                                             <th scope="col">Keterangan</th>
-                                            <!-- buat langsung munculin ngeprint -->
+                                            <!-- buat langsung munculin print/save, kayak di tombol download surat-surat kelengkapan permohonan legalisir -->
                                         </tr>
                                     </thead>
                                     <tbody>
