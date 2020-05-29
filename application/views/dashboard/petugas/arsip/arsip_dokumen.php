@@ -53,7 +53,9 @@
                                             <th scope="col">NIM</th>
                                             <th scope="col">Prodi</th>
                                             <th scope="col">Tahun Lulus</th>
-                                            <th scope="col">Keterangan</th>
+                                            <th scope="col">Ijazah</th>
+                                            <!-- buat langsung munculin print/save, kayak di tombol download surat-surat kelengkapan permohonan legalisir -->
+                                            <th scope="col">Transkrip</th>
                                             <!-- buat langsung munculin print/save, kayak di tombol download surat-surat kelengkapan permohonan legalisir -->
                                         </tr>
                                     </thead>
@@ -68,7 +70,11 @@
                                             <td>2020</td>
                                             <td>
                                                 <!-- belum buat controller -->
-                                                <a href="<?php echo base_url('petugas/arsip/print') ?>" button type="button" class="btn btn-block btn-info btn-xs">Print</a>
+                                                <a href="<?php echo base_url('petugas/arsip/print') ?>" button type="button" class="btn btn-block btn-info btn-xs" style="width: 60px">Print</a>
+                                            </td>
+                                            <td>
+                                                <!-- belum buat controller -->
+                                                <a href="<?php echo base_url('petugas/arsip/print') ?>" button type="button" class="btn btn-block btn-info btn-xs" style="width: 60px">Print</a>
                                             </td>
                                         </tr>
                                     </tbody>
