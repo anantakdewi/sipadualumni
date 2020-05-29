@@ -66,13 +66,40 @@ $route['petugas/dashboard'] = 'petugas/dashboard_petugas';
 $route['petugas/dashboard/pengumuman'] = 'petugas/dashboard_petugas/postPengumuman';
 
 // Daftar Permohonan Petugas
-$route['petugas/monitoring'] = 'petugas/list_permohonan/lihatList';
-$route['petugas/monitoring/read'] = 'petugas/monitoring_petugas/lihatStatus';
-$route['petugas/monitoring/surat'] = 'petugas/list_permohonan/downloadSurat';
-$route['petugas/monitoring/onproccess'] = 'petugas/monitoring_petugas/dokumen';
-$route['petugas/monitoring/selesai'] = 'petugas/monitoring_petugas/format';
+//pagenation permohonan baru
+$route['petugas/monitoring/baru'] = 'petugas/list_permohonan/lihatList';
+$route['petugas/monitoring/baru/:num'] = 'petugas/list_permohonan/lihatList';
+
+//pagenation permohonan sedang di proses
+$route['petugas/monitoring/sedangProses'] = 'petugas/list_permohonan/lihatList';
+$route['petugas/monitoring/sedangProses/:num'] = 'petugas/list_permohonan/lihatList';
+
+//pagenation permohonan selesai
+$route['petugas/monitoring/selesai'] = 'petugas/list_permohonan/lihatList';
+$route['petugas/monitoring/'] = 'petugas/list_permohonan/lihatList';
+
+//Read Detail Permohonan
+$route['petugas/monitoring/read/:num'] = 'petugas/monitoring_petugas/lihatStatus';
+$route['petugas/download/surat/:num'] = 'petugas/monitoring_petugas/downloadSurat';
+$route['petugas/monitoring/read/post'] = 'petugas/monitoring_petugas/post';
+
+// $route['petugas/monitoring/surat'] = 'petugas/list_permohonan/downloadSurat';
 $route['petugas/arsip'] = 'petugas/arsip_petugas/dokumen';
+$route['petugas/arsip/cari'] = 'petugas/arsip_petugas/cariIjazah';
+
 $route['petugas/arsip/surat'] = 'petugas/arsip_petugas/surat';
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Dashboard Pemohon
 $route['pemohon/dashboard'] = 'pemohon/dashboard_pemohon';
@@ -92,9 +119,6 @@ $route['pemohon/legalisir/download/:any'] = 'pemohon/legalisir_pemohon/downloadS
 // Pengambilan Pemohon
 $route['pemohon/pengambilan/pengajuan'] = 'pemohon/pengambilan_pemohon/showForm';
 $route['pemohon/pengambilan/submit'] = 'pemohon/pengambilan_pemohon/postForm';
-
-//Download Surat
-$route['pemohon/legalisir/download/:any'] = 'pemohon/legalisir_pemohon/downloadSurat/';
 
 // Lainnya Pemohon
 $route['pemohon/lainnya/submit'] = 'pemohon/lainnya_pemohon/submit';

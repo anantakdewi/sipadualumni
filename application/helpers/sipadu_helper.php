@@ -36,7 +36,7 @@ function permohonanOnProgress($id)
     $CI->db->select('count(id) as id');
     $CI->db->from('permohonan');
     $CI->db->where('user_id', $id);
-    $CI->db->where('status !=', 4);
+    $CI->db->where('status !=', 7);
     $query = $CI->db->get()->result_array();
 
     $count = $query[0]["id"];

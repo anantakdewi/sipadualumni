@@ -5,23 +5,73 @@ class list_permohonan extends CI_Controller
 {
     public function lihatList()
     {
-        // data for active nav
-        $data = array(
-            'nav_data' => 'permohonan baru',
-            'title' => 'Daftar Permohonan',
-            'breadcumb' => array('', ''),
-            'small_title' => 'Permohonan Baru',
-        );
-
-        $data['title'] = 'Daftar Permohonan';
-
+        // LOAD EVERYTHING HERE //
         $this->load->model('List_permohonan_model', 'list_permohonan');
-
-        //Pagination
         $this->load->library('pagination');
-        //config
-        $config['base_url'] = 'http://localhost/sipadualumni/petugas/list_permohonan/lihatList/';
-        $config['total_rows'] = $this->list_permohonan->countAllList_permohonan();
+
+        // CHECK URL FOR PAGINATION 
+        $type = $this->uri->segment(3);
+        
+        switch($type){
+
+            case "baru" :
+
+                $data = array(
+                    'nav_data' => 'permohonan baru',
+                    'title' => 'Daftar Permohonan',
+                    'breadcumb' => array('', ''),
+                    'small_title' => 'Permohonan Baru',
+                );
+
+                $statusPermohonan = ['1'];
+                $list['headerBox'] = "Permohonan Baru";
+
+                // print "<pre>";
+                // var_dump($statusPermohonan);
+                // die;
+                
+                $config['base_url'] = base_url('petugas/monitoring/baru');
+                break;
+
+            
+            
+            case "sedangProses" :
+
+                $data = array(
+                    'nav_data' => 'permohonan baru',
+                    'title' => 'Daftar Permohonan',
+                    'breadcumb' => array('', ''),
+                    'small_title' => 'Permohonan dalam Proses',
+                );
+
+                $statusPermohonan = ['2','4'];
+                $list['headerBox'] = "Permohonan dalam Proses";
+
+                $config['base_url'] = base_url('petugas/monitoring/sedangProses');
+                break;
+
+
+
+            case "selesai" :
+                
+                $data = array(
+                    'nav_data' => 'permohonan baru',
+                    'title' => 'Daftar Permohonan',
+                    'breadcumb' => array('', ''),
+                    'small_title' => 'Permohonan Selesai',
+                );
+
+                $statusPermohonan = ['7'];
+                $list['headerBox'] = "Permohonan Selesai";
+
+                $config['base_url'] = base_url('petugas/monitoring/selesai');
+                break;
+
+        }
+
+        // $config['base_url'] = 'http://localhost/sipadualumni/petugas/list_permohonan/lihatList/';
+
+        $config['total_rows'] = $this->list_permohonan->countAllList_permohonan($statusPermohonan);
         $config['per_page'] = 10;
 
         //custom
@@ -52,20 +102,19 @@ class list_permohonan extends CI_Controller
 
         $config['attributes'] = array('class' => 'page-link');
 
-
-
         //inisiasi
         $this->pagination->initialize($config);
 
+        $list['start'] = $this->uri->segment(4);
 
-
-        $data['start'] = $this->uri->segment(3);
-
-        $data['list_permohonan'] = $this->list_permohonan->getList_permohonan($config['per_page'], $data['start']);
-
+        $list['list_permohonan'] = $this->list_permohonan->getList_permohonan($config['per_page'], $list['start'], $statusPermohonan);
+        
+        // print "<pre>";
+        // print_r($list['list_permohonan']);
+        // die();
 
         $this->load->view('dashboard/template/dashboard_header2', $data);
-        $this->load->view('dashboard/petugas/monitoring/monitoring_petugas', $data);
+        $this->load->view('dashboard/petugas/monitoring/monitoring_petugas', $list);
         $this->load->view('dashboard/template/dashboard_footer');
     }
 

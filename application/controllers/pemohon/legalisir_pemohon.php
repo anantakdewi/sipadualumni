@@ -59,6 +59,7 @@ class legalisir_pemohon extends CI_Controller
         $this->load->model('Surat');
         $this->load->model('Progress');
 
+
         // $this->form_validation->set_rules('pengambilan_dokumen', 'Pengambilan Dokumen', 'required');
 
         $this->form_validation->set_rules('surat_permohonan_legalisir', '', 'callback_file_check[surat_permohonan_legalisir]');
@@ -251,10 +252,20 @@ class legalisir_pemohon extends CI_Controller
                                 $details = $this->upload->data();
                             }
 
+                            //menghilangkan path depan sebelum assets
+                            $str = $details['full_path'];
+                            $path = explode('/', $str);
+                            unset($test[0]);
+                            unset($test[1]);
+                            unset($test[2]);
+                            unset($test[3]);
+                    
+                            $path = implode('/', $path);
 
                             $surat = array(
                                 'permohonan_id' => $id_permohonan,
-                                'path' => $details['full_path'],
+                                'nama_surat' => ucwords(str_replace('_', ' ', $arr_var_gambar[$i])),
+                                'path' => $path,
                                 'status' => 1,
                                 'created_at' => date("Y-m-d H:i:s"),
                             );
@@ -289,15 +300,17 @@ class legalisir_pemohon extends CI_Controller
 
         $allowed_type_arr = array('application/pdf', 'image/gif', 'image/jpeg', 'image/png', 'image/x-png', 'application/msword');
 
-        if ($variableFile == "surat_permohonan_legalisir") {
-            $mime = get_mime_by_extension($_FILES['surat_permohonan_legalisir']['name']);
-        } else if ($variableFile == "surat_izin_eselon_2") {
-            $mime = get_mime_by_extension($_FILES['surat_izin_eselon_2']['name']);
-        } else if ($variableFile == "surat_izin_pusdiklat") {
-            $mime = get_mime_by_extension($_FILES['surat_izin_pusdiklat']['name']);
-        } else if ($variableFile == "surat_bukti_daftar_univ") {
-            $mime = get_mime_by_extension($_FILES['surat_bukti_daftar_univ']['name']);
-        }
+        // if ($variableFile == "surat_permohonan_legalisir") {
+        //     $mime = get_mime_by_extension($_FILES['surat_permohonan_legalisir']['name']);
+        // } else if ($variableFile == "surat_izin_eselon_2") {
+        //     $mime = get_mime_by_extension($_FILES['surat_izin_eselon_2']['name']);
+        // } else if ($variableFile == "surat_izin_pusdiklat") {
+        //     $mime = get_mime_by_extension($_FILES['surat_izin_pusdiklat']['name']);
+        // } else if ($variableFile == "surat_bukti_daftar_univ") {
+        //     $mime = get_mime_by_extension($_FILES['surat_bukti_daftar_univ']['name']);
+        // }
+
+        $mime = get_mime_by_extension($_FILES[$variableFile]['name']);
 
         if (isset($mime)) {
             if (in_array($mime, $allowed_type_arr)) {
