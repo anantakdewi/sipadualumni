@@ -61,8 +61,8 @@
                                         <!--biar urut -->
                                         <tr>
                                             <th><?php $i++; ?></th>
-                                            <td>Ananta Kusuma</td>
                                             <td>Surat Akreditasi Prodi</td>
+                                            <td>Ananta Kusuma</td>
                                             <td>
                                                 <!-- belum buat controller -->
                                                 <a href="<?php echo base_url('petugas/arsip/save') ?>" button type="button" class="btn btn-block btn-info btn-xs" style="width: 75px">Print</a>
