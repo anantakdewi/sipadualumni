@@ -71,8 +71,8 @@ $route['petugas/monitoring/read'] = 'petugas/monitoring_petugas/lihatStatus';
 $route['petugas/monitoring/surat'] = 'petugas/list_permohonan/downloadSurat';
 $route['petugas/monitoring/onproccess'] = 'petugas/monitoring_petugas/dokumen';
 $route['petugas/monitoring/selesai'] = 'petugas/monitoring_petugas/format';
-$route['petugas/arsip'] = 'petugas/arsip_petugas/dokumen';
-$route['petugas/arsip/surat'] = 'petugas/arsip_petugas/surat';
+$route['petugas/arsip'] = 'petugas/arsip_petugas/surat';
+
 
 // Dashboard Pemohon
 $route['pemohon/dashboard'] = 'pemohon/dashboard_pemohon';
