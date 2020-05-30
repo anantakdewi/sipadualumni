@@ -28,20 +28,6 @@ class arsip_petugas extends CI_Controller
         sudah_login();
     }
 
-    public function dokumen()
-    {
-        // data for header
-        $data = array(
-            'nav_data' => 'arsip',
-            'title' => 'Arsip',
-            'breadcumb' => '',
-            'small_title' => 'Arsip Ijazah dan Transkrip',
-        );
-
-        $this->load->view('dashboard/template/dashboard_header2', $data);
-        $this->load->view('dashboard/petugas/arsip/arsip_dokumen');
-        $this->load->view('dashboard/template/dashboard_footer');
-    }
 
 
     public function cariSurat()
