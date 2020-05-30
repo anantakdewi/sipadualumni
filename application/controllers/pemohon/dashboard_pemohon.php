@@ -29,6 +29,7 @@ class dashboard_pemohon extends CI_Controller
         if (is_null($this->session->userdata('email'))) {
             redirect((base_url('auth/login')));
         };
+
     }
 
     public function index()
@@ -42,12 +43,36 @@ class dashboard_pemohon extends CI_Controller
         );
 
 
-        $this->db->select('permohonan.jenis_permohonan, permohonan.nama_permohonan, progress.created_at, progress.status, progress.komentar');
-        $this->db->from('progress');
-        $this->db->join('permohonan', 'progress.permohonan_id = permohonan.id');
-        $this->db->where('progress.user_id', $this->session->userdata('id'));
-        $this->db->where('permohonan.status !=', 4);
-        $query['queries'] = $this->db->get()->result_array();
+        $this->db->select('id, jenis_permohonan, nama_permohonan, created_at, status');
+        $this->db->from('permohonan');
+        $this->db->where('permohonan.user_id', $this->session->userdata('id'));
+        $this->db->where('permohonan.selesai !=', 1);
+        $hasil = $this->db->get()->result_array();
+
+        if(sizeof($hasil) != 0){
+
+            $hasil[0]['created_at'] = date('d M Y',strtotime($hasil[0]['created_at']));
+            $query['permohonan'] = $hasil[0];
+
+        } else {
+            $query['permohonan'] = $hasil;
+        }
+
+        $this->db->select('*');
+        $this->db->order_by('id', 'DESC');
+        $pengumuman = $this->db->get('pengumuman',1)->result_array();
+
+        $query['pengumuman'] = $pengumuman[0];
+
+        $this->db->select('path');
+        $dokumen = $this->db->get_where('dokumen_pengumuman', array('pengumuman_id' => $pengumuman[0]['id']) )->result_array();
+
+        $query['dokumen_pengumuman'] = $dokumen;
+
+
+        // print "<pre>";
+        // print_r($query);
+        // die;
 
         $this->load->view('dashboard/template/dashboard_header', $data);
         $this->load->view('dashboard/pemohon/dashboard_pemohon', $query);
@@ -65,20 +90,148 @@ class dashboard_pemohon extends CI_Controller
             'small_title' => 'Monitoring',
         );
 
-        $this->db->select('permohonan.jenis_permohonan, permohonan.nama_permohonan, progress.created_at, progress.status, progress.komentar');
+        $this->db->select('permohonan.id as id_permohonan, permohonan.jenis_permohonan, permohonan.jenis_pengambilan,
+                            permohonan.status as statusNow, permohonan.nama_permohonan, progress.created_at, progress.status, progress.komentar');
+
         $this->db->from('progress');
         $this->db->join('permohonan', 'progress.permohonan_id = permohonan.id');
         $this->db->where('progress.user_id', $this->session->userdata('id'));
-        $this->db->where('permohonan.status !=', 4);
-        $query['queries'] = $this->db->get()->result_array();
+        $this->db->where('permohonan.selesai !=', 1);
+        $query = $this->db->get()->result_array();
+        
+        $arr['results'] = $query;
+        
+        if(sizeof($query) != 0){
 
+            $index = sizeof($query) - 1;
+
+
+            if($query[$index]['status'] == 5 && $query[$index]['jenis_pengambilan'] == "Unduh"){
+
+                $this->db->select('id as id_dokumen');
+                $this->db->from('dokumen');
+                $this->db->where('permohonan_id', $query[0]['id_permohonan']);
+                $dokumenPath = $this->db->get()->result_array();
+                
+                $arr['dokumen'] = $dokumenPath;
+
+            } elseif($query[$index]['jenis_pengambilan'] == "POS"){
+
+                $this->db->select('resi');
+                $this->db->from('permohonan');
+                $this->db->where('id', $query[0]['id_permohonan']);
+                $arr['resi'] = $this->db->get()->row()->resi;
+
+            }
+
+
+        }
+        
+        
         // print "<pre>";
-        // var_dump(empty($query['queries']));
+        // var_dump($arr);
         // die();
 
         $this->load->view('dashboard/template/dashboard_header', $data);
-        $this->load->view('dashboard/pemohon/monitoring_pemohon', $query);
+        $this->load->view('dashboard/pemohon/monitoring_pemohon', $arr);
         $this->load->view('dashboard/template/dashboard_footer');
+    }
+
+
+    public function downloadDokumen()
+	{
+
+        $this->load->helper('download');
+
+        $id_dokumen = $this->uri->segment(4);
+
+        
+        $this->db->select('path, count, jenis_dokumen');
+        $this->db->from('dokumen');
+        $this->db->where('id', $id_dokumen);
+        $query = $this->db->get()->row();
+
+        // print "<pre>";
+        // print_r($query->path);
+        // die();
+
+        if($query->count >= 3){
+
+             $arr_flashdata = array(
+                        'type' => 'warning',
+                        'title' => 'Erorr!',
+                        'messages' => 'Dokumen sudah mencapai batas max download!',
+                    );
+
+            $this->session->set_flashdata('alert', $arr_flashdata);
+
+            redirect_back();
+
+        }
+
+        $path = $query->path;
+
+        $extFile = pathinfo($path);
+
+        $file = file_get_contents($path);
+
+        $filename = $query->jenis_dokumen . '_' . $this->session->userdata('nama') . '.' . $extFile['extension'];
+        
+
+        // print "<pre>";
+        // var_dump($path);
+        // var_dump($filename);
+        // // var_dump($file);
+        // die();
+
+        $this->db->set('count', 'count+1', FALSE);
+        $this->db->where('id', $id_dokumen);
+        $this->db->update('dokumen');
+
+        force_download($filename,$file,TRUE);
+        // redirect(base_url($path));
+
+    }
+    
+    public function konfirmasi()
+    {
+        $konfirmasi = $this->uri->segment(3);
+        $id_permohonan = $this->uri->segment(4);
+
+        if($konfirmasi == 'selesai'){
+
+            $this->db->set('selesai', 1);
+            $this->db->where('id', $id_permohonan);
+            $this->db->update('permohonan');
+
+        } elseif($konfirmasi == 'sampai'){
+
+            $this->load->model('Progress');
+
+            $progress = array(
+                'user_id' => $this->session->userdata('id'),
+                'permohonan_id' => $id_permohonan,
+                'status' => 7,
+                'created_at' => date('Y-m-d H:i:s'),
+            );
+
+            $this->Progress->insert($progress);
+
+            $this->db->set('status', 7);
+            $this->db->where('id', $id_permohonan);
+            $this->db->update('permohonan');
+
+        } else {
+
+            // url error
+
+            redirect_back();
+        }
+
+
+        //notifikasi sukses
+
+        redirect_back();
     }
 
     public function legalisir()

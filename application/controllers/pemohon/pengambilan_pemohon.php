@@ -75,6 +75,7 @@ class pengambilan_pemohon extends CI_Controller
                     'resi' => NULL,
                     'status' => 1,
                     'read' => 0,
+                    'selesai' => 0,
                     'tgl_ambil' => $tgl_pengambilan,
                     'created_at' => date("Y-m-d H:i:s")
                 );

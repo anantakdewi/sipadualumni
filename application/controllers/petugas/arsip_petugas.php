@@ -43,6 +43,23 @@ class arsip_petugas extends CI_Controller
         $this->load->view('dashboard/template/dashboard_footer');
     }
 
+
+    public function cariSurat()
+    {
+        $this->form_validation->set_rules('cari','','required');
+
+        if($this->form_validation-run() == false){
+
+            redirect_back();
+
+        } else {
+
+            $nama = $this->input->post('nama');
+            
+        }
+
+    }
+
     public function surat()
     {
         // data for header

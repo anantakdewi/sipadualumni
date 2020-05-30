@@ -28,13 +28,58 @@
         <div class="col-md-9">
             <div class="box box-primary">
                 <div class="box-header with-border">
+                    <h3 class="box-title">Pencarian Ijazah dan Transkrip</h3>
+                    <!-- /.box-tools -->
+                </div>
+
+                <div class="container">
+
+                    <div class="row">
+
+                        <div class="col-md-8">
+
+                            <form action="<?php echo base_url('pemohon/legalisir/submit')?>" method="post" enctype="multipart/form-data">
+                            
+
+                            <div class="form-group">
+                                <label>Nama</label>
+                                <input type="text" class="form-control" name="cari" value="" id="alamat_pos">
+                                <?php echo form_error('alamat', '<small class="text-danger pl-3">', '</small>');?>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-primary" value="Cari">
+                            </div>
+                            
+
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <!-- /.col -->
+            </div>
+        </div>
+
+
+        <div class="col-md-3"></div>
+
+        <div class="col-md-9">
+            <div class="box box-primary">
+                <div class="box-header with-border">
                     <h3 class="box-title">Arsip Ijazah dan Transkrip</h3>
                     <!-- /.box-tools -->
                 </div>
+
                 <div class="container">
+
                     <div class="row">
+
                         <div class="col-md-9">
+
                             <table class="table">
+                            
                                 <thead>
                                     <tr>
                                         <th scope="col">Nama</th>
@@ -55,6 +100,11 @@
                 <!-- /.col -->
             </div>
         </div>
+
+
+        
+
+        
     </div>
 
 

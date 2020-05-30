@@ -36,7 +36,7 @@ function permohonanOnProgress($id)
     $CI->db->select('count(id) as id');
     $CI->db->from('permohonan');
     $CI->db->where('user_id', $id);
-    $CI->db->where('status !=', 4);
+    $CI->db->where('selesai !=', 1);
     $query = $CI->db->get()->result_array();
 
     $count = $query[0]["id"];
@@ -71,3 +71,44 @@ function redirect_back()
         }
         exit;
     }
+
+function maskNip($nip_kasar){
+
+//mask nip agar ada pisah pisah nya
+
+    $nipKasar = str_split($nip_kasar);
+    
+    
+    $i = 0;
+    $space = 1;
+    $nip = '';
+    while($i < sizeof($nipKasar)){
+
+        if($i <= 7){
+            $nip .= $nipKasar[$i];
+            $i++;
+        } else if($i == 8 && $space == 1){
+            $nip .= ' ';
+            $space++;
+        } else if($i <= 14){
+            $nip .= $nipKasar[$i];
+            $i++;
+        } else if($i == 15 && $space == 2){
+            $nip .= ' ';
+            $space++;
+        } else if($i == 15){
+            $nip .= $nipKasar[$i];
+            $i++;
+        } else if($i == 16 && $space == 3){
+            $nip .= ' ';
+            $space++;
+        } else if($i <= 18) {
+            $nip .= $nipKasar[$i];
+            $i++;
+        }
+
+    }
+
+    return $nip;
+
+}

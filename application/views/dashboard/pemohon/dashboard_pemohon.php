@@ -1,9 +1,9 @@
 <div class="row">
 
-    <div class="col-md-7">
+    <div class="col-md-8">
         <div class="box">
         <div class="box-header with-border">
-            <h3 class="box-title">Progress Tracker Surat</h3>
+            <h3 class="box-title">Permohonan Aktif</h3>
 
             <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -14,132 +14,56 @@
         </div>
         <!-- /.box-header -->
         <div class="box-body">
-        <?php 
+            <?php if(sizeof($permohonan) != 0) :?>
 
-            if(!empty($queries)){
+            <div class="box-body table-responsive no-padding">
+              <table class="table table-hover">
+                <tr>
+                  <th>Permohonan</th>
+                  <th>Tanggal dibuat</th>
+                  <th>Proggress</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+                <tr>
+                    
+                <?php if($permohonan['jenis_permohonan'] != "Lainnya") : ?>
+                    <td><?php echo $permohonan['jenis_permohonan'] ?></td>
+                <?php else : ?>
+                    <td><?php echo $permohonan['nama_permohonan'] ?></td>
+                <?php endif; ?>
+                  <td><?php echo $permohonan['created_at'] ?></td>
 
-                echo '<ul class="timeline">';
+                <?php if($permohonan['status'] == 1) : ?>
+                  <td>Menunggu Konfirmasi Petugas</td>
+                  <td><span class="label label-warning">Pending</span></td>
+                <?php elseif($permohonan['status'] == 2) : ?>
+                  <td>Menunggu Konfirmasi Petugas</td>
+                  <td><span class="label label-warning">Pending</span></td>
+                <?php elseif($permohonan['status'] == 3) : ?>
+                  <td>Permohonan tidak lengkap!</td>
+                  <td><span class="label label-danger">Ditolak</span></td>
+                <?php elseif($permohonan['status'] == 4) : ?>
+                  <td>Permohonan sedang di proses</td>
+                  <td><span class="label label-success">Proses</span></td>
+                <?php elseif($permohonan['status'] == 5) : ?>
+                  <td>Dokumen selesai</td>
+                  <td><span class="label label-success">Selesai</span></td>
+                <?php elseif($permohonan['status'] == 6) : ?>
+                  <td>Dokumen Dikirim melalui POS</td>
+                  <td><span class="label label-success">Proses</span></td>
+                <?php elseif($permohonan['status'] == 7) : ?>
+                  <td>Permohonan Selesai Silahkan konfirmasi</td>
+                  <td><span class="label label-success">Selesai</span></td>
+                <?php endif; ?>
+                  <td><a href="<?php echo base_url('pemohon/monitoring') ?>"><button class="btn btn-sm btn-primary">Detail</button></a></td>
 
-                foreach($queries as $query){
-
-                    if($query['status'] == 1){
-
-                        echo('
-
-                        <li class="time-label">
-                            <span class="bg-green">'
-                            . date('j M. Y', strtotime($query['created_at'])) .
-                            '</span>
-                        </li>
-
-                        <li>
-                            <!-- timeline icon -->
-                            <i class="fa fa-envelope bg-green"></i>
-                            <div class="timeline-item">
-
-                                <h3 class="timeline-header bg-green">Permohonan diterima</h3>
-
-                                <div class="timeline-body">
-                                    Surat sudah diajukan
-                                </div>
-
-                            </div>
-                        </li>
-
-                        ');
-                    }
-
-                    else if($query['status'] == 2){
-                        echo('
-                        
-                        <li class="time-label">
-                            <span class="bg-blue">'
-                            . date('j M. Y', strtotime($query['created_at'])) .
-                            '</span>
-                        </li>
-
-                        <li>
-                            <!-- timeline icon -->
-                            <i class="fa fa-envelope bg-blue"></i>
-                            <div class="timeline-item">
-
-                                <h3 class="timeline-header bg-blue">Permohonan sedang diproses</h3>
-
-                                <div class="timeline-body">
-                                    <!-- progress description -->
-
-                                    Permohonan Sedang di proses
-
-                                </div>
-                            </div>
-                        </li>
-                        
-                        ');
-                    } else if($query['status'] == 3){
-
-                        echo('
-                        
-                        <li class="time-label">
-                            <span class="bg-red">'
-                            . date('j M. Y', strtotime($query['created_at'])) .
-                            '</span>
-                        </li>
-
-                        <li>
-                            <!-- timeline icon -->
-                            <i class="fa fa-envelope bg-red"></i>
-                            <div class="timeline-item">
-
-                                <h3 class="timeline-header bg-red">Permohonan Bermasalah</h3>
-
-                                <div class="timeline-body">
-                                    <!-- progress description -->
-
-                                    Surat tidak Valid!
-
-                                </div>
-                            </div>
-                        </li>
-                                                
-                        ');
-
-
-                    } else if($query['status'] == 4){
-
-                        echo('
-
-                        <li class="time-label">
-                            <span class="bg-green">'
-                            . date('j M. Y', strtotime($query['created_at'])) .
-                            '</span>
-                        </li>
-
-                        <li>
-                            <!-- timeline icon -->
-                            <i class="fa fa-envelope bg-green"></i>
-                            <div class="timeline-item">
-
-                                <h3 class="timeline-header bg-green">Permohonan telah selesai</h3>
-
-                                <div class="timeline-body">
-                                    <Permohonan telah dikirim melalui POS dengan Resi : 123810293103
-                                </div>
-
-                            </div>
-                        </li>
-
-                        ');
-                    }
-                }
-
-                echo '</ul>';
-                
-            } else {
-
-                echo '<center><h2>Anda tidak memiliki permohonan aktif</h2></center>';
-
-            }
-        ?>
+                </tr>
+              </table>
+            </div>
+            <?php else : ?>
+            <h2 class="text-center">Anda tidak memiliki Permohonan Aktif</h2>
+            <?php endif; ?>
         </div>
         <!-- ./box-body -->
         </div>
@@ -148,7 +72,7 @@
     <!-- /.col -->
 
 
-    <div class="col-md-5">
+    <div class="col-md-4">
         <div class="box">
         <div class="box-header with-border">
             <h3 class="box-title">Pengumuman</h3>
@@ -162,27 +86,26 @@
         </div>
         <!-- /.box-header -->
         <div class="box-body">
+            
+            <?php if(!empty($pengumuman)) : ?>
 
-            <!-- <ul class="products-list product-list-in-box"> -->
-            <!-- list pengumunan start here -->
-            <!-- <li class="item">
-                <div class="product-img">
-                <img src="<?php echo base_url()?>assets/dist/img/default-50x50.gif" alt="Product Image">
-                </div>
-                <div class="product-info">
-                <a href="javascript:void(0)" class="product-title">Samsung TV
-                    <span class="label label-warning pull-right">$1800</span></a>
-                    <span class="product-description">
-                        Samsung 32" 1080p 60Hz LED Smart HDTV.
-                    </span>
-                </div>
-            </li> -->
-            <!-- list pengumunan end here -->
- 
+                <?php echo $pengumuman['pengumuman'] ?>
 
-            <!-- </ul> -->
+                <?php if(sizeof($dokumen_pengumuman) != 0) : ?>
+
+                    <?php foreach($dokumen_pengumuman as $dok) : ?>
+
+                    <a href="<?php echo base_url($dok['path']) ?>"><button class="btn btn-primary">Dokumen Pengumuman</button></a>
+
+                    <?php endforeach; ?>
+
+                <?php endif; ?>
+
+            <?php else : ?>
 
             <h5 class="text-muted text-center">Tidak ada Pengumuman</h5>
+
+            <?php endif; ?>
 
         </div>
         <!-- ./box-body -->

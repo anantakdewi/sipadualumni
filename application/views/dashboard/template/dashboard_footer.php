@@ -77,7 +77,11 @@
 
 <script>
   $(function() {
-    $("#compose-textarea").wysihtml5();
+    $("#compose-textarea").wysihtml5({
+      toolbar: {
+        'image' : false,
+      }
+    });
   });
 </script>
 

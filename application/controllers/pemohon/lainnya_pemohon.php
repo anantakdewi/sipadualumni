@@ -95,6 +95,7 @@ class lainnya_pemohon extends CI_Controller
                 'resi' => NULL,
                 'status' => 1,
                 'read' => 0,
+                'selesai' => 0,
                 'tgl_ambil' => NULL,
                 'created_at' => date("Y-m-d H:i:s"),
                 'updated_at' => NULL,
@@ -124,9 +125,20 @@ class lainnya_pemohon extends CI_Controller
                     $details = $this->upload->data();
                 }
 
+                //menghilangkan path depan sebelum assets
+                $str = $details['full_path'];
+                $path = explode('/', $str);
+                unset($test[0]);
+                unset($test[1]);
+                unset($test[2]);
+                unset($test[3]);
+        
+                $path = implode('/', $path);
+
                 $surat = array(
                     'permohonan_id' => $id_permohonan,
-                    'path' => $details['full_path'],
+                    'nama_surat' => 'Surat Format',
+                    'path' => $path,
                     'status' => 1,
                     'created_at' => date("Y-m-d H:i:s"),
                 );

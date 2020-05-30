@@ -1,4 +1,6 @@
 <!-- Main content -->
+
+
 <section class="content">
   <div class="row">
     <div class="col-md-3">
@@ -13,9 +15,9 @@
         </div>
         <div class="box-body no-padding">
           <ul class="nav nav-pills nav-stacked">
-            <li class=""><a href="<?php echo base_url('petugas/monitoring') ?>"><i class="fa fa-inbox"></i>Permohonan Baru
-                <span class="label label-primary pull-right">12</span></a></li>
-            <li><a href="<?php echo base_url('petugas/monitoring/onproccess') ?>"><i class="fa fa-file-text-o"></i>Permohonan Sedang Diproses</a></li>
+            <li class=""><a href="<?php echo base_url('petugas/monitoring/baru') ?>"><i class="fa fa-inbox"></i>Permohonan Baru
+                <span class="label label-primary pull-right"><?php echo $this->session->userdata('newPermohonanCount');; ?></span></a></li>
+            <li><a href="<?php echo base_url('petugas/monitoring/sedangProses') ?>"><i class="fa fa-file-text-o"></i>Permohonan Sedang Diproses</a></li>
             <li><a href="<?php echo base_url('petugas/monitoring/selesai') ?>"><i class="fa fa-envelope-o"></i>Permohonan Selesai</a></li>
           </ul>
         </div>
@@ -28,7 +30,7 @@
     <div class="col-md-9">
       <div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title">Permohonan Baru</h3>
+          <h3 class="box-title"><?php echo $headerBox ?></h3>
 
 
 
@@ -55,11 +57,11 @@
                 <tbody>
                   <?php foreach ($list_permohonan as $list) : ?>
                     <tr>
-                      <td><?php echo $list['nama']; ?></td>
+                      <td><?php echo $list['nama']; ?> <?php if($list['read'] == 0){ echo '<span class="label label-success pull-right">New</span>'; } ?></td>
                       <td><?php echo $list['email']; ?></td>
                       <td><?php echo $list['jenis_permohonan']; ?></td>
                       <td>
-                        <a href="<?php echo base_url('petugas/monitoring/read') ?>" button type="button" class="btn btn-block btn-primary btn-xs">Ubah</a>
+                        <a href="<?php echo base_url('petugas/monitoring/read/') . $list['permohonan_id']  ?>" button type="button" class="btn btn-block btn-primary btn-xs">Ubah</a>
                       </td>
                     </tr>
                   <?php endforeach; ?>

@@ -267,12 +267,18 @@ class Auth extends CI_Controller
 
                         // if($thAngkat )
 
+                        // print "<pre>";
+                        // var_dump($nip);
+                        // die;
+
+                        // die(maskNip($alumni['nip']));
+
                         // jika password benar
                         $user_data = [
                             'id' => $alumni['id'],
                             'email' => $alumni['email'],
                             'nama' => $alumni['nama'],
-                            'nip' => $alumni['nip'],
+                            'nip' => maskNip($alumni['nip']),
                             'role_id' => $alumni['role_id'],
                             'tahun_abdi' => $selisih . "",
                         ];
