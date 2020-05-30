@@ -85,10 +85,9 @@ $route['petugas/download/surat/:num'] = 'petugas/monitoring_petugas/downloadSura
 $route['petugas/monitoring/read/post'] = 'petugas/monitoring_petugas/post';
 
 // $route['petugas/monitoring/surat'] = 'petugas/list_permohonan/downloadSurat';
-$route['petugas/arsip'] = 'petugas/arsip_petugas/dokumen';
-$route['petugas/arsip/cari'] = 'petugas/arsip_petugas/cariIjazah';
-
-$route['petugas/arsip/surat'] = 'petugas/arsip_petugas/surat';
+$route['petugas/arsip'] = 'petugas/arsip_petugas/surat';
+$route['petugas/arsip/cari'] = 'petugas/arsip_petugas/cariSurat';
+$route['petugas/arsip/save/:num'] = 'petugas/arsip_petugas/download';
 
 
 

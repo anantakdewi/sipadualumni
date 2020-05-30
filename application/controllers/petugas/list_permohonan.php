@@ -56,7 +56,7 @@ class list_permohonan extends CI_Controller
                     'small_title' => 'Permohonan dalam Proses',
                 );
 
-                $statusPermohonan = ['2', '4'];
+                $statusPermohonan = ['2', '4', '5'];
                 $list['headerBox'] = "Permohonan dalam Proses";
 
                 $config['base_url'] = base_url('petugas/monitoring/sedangProses');
@@ -71,7 +71,6 @@ class list_permohonan extends CI_Controller
                     'small_title' => 'Permohonan Selesai',
                 );
 
-                $statusPermohonan = ['7'];
                 $list['headerBox'] = "Permohonan Selesai";
 
                 $config['base_url'] = base_url('petugas/monitoring/selesai');
@@ -80,7 +79,20 @@ class list_permohonan extends CI_Controller
 
         // $config['base_url'] = 'http://localhost/sipadualumni/petugas/list_permohonan/lihatList/';
 
-        $config['total_rows'] = $this->list_permohonan->countAllList_permohonan($statusPermohonan);
+        if($type == "selesai"){
+
+            $this->db->from('permohonan');
+            $this->db->where('selesai', 1);
+            $selesaiCount = $this->db->count_all_results();
+
+            $config['total_rows'] = $selesaiCount;
+
+        } else {
+
+            $config['total_rows'] = $this->list_permohonan->countAllList_permohonan($statusPermohonan);
+
+        }
+        
         $config['per_page'] = 10;
 
         //custom
@@ -116,8 +128,23 @@ class list_permohonan extends CI_Controller
 
         $list['start'] = $this->uri->segment(4);
 
-        $list['list_permohonan'] = $this->list_permohonan->getList_permohonan($config['per_page'], $list['start'], $statusPermohonan);
+        if($type == "selesai"){
 
+            $this->db->select('users.nama, users.email, permohonan.id as permohonan_id, permohonan.jenis_permohonan, permohonan.nama_permohonan, permohonan.status, permohonan.read');
+            $this->db->from('permohonan');
+            $this->db->join('users', 'permohonan.user_id = users.id');
+            $this->db->where_in('selesai', 1);
+            $this->db->limit($config['per_page'], $list['start']);
+            $this->db->order_by('permohonan.created_at', 'DESC');
+            $list['list_permohonan'] = $this->db->get()->result_array();
+
+        } else {
+            
+            $list['list_permohonan'] = $this->list_permohonan->getList_permohonan($config['per_page'], $list['start'], $statusPermohonan);
+
+        }
+        
+       
         // print "<pre>";
         // print_r($list['list_permohonan']);
         // die();

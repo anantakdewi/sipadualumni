@@ -18,7 +18,7 @@ class List_permohonan_model extends CI_Model
 
         $this->session->set_userdata('newPermohonanCount', $count);
 
-        $this->db->select('users.nama, users.email, permohonan.id as permohonan_id, permohonan.jenis_permohonan, permohonan.status, permohonan.read');
+        $this->db->select('users.nama, users.email, permohonan.id as permohonan_id, permohonan.jenis_permohonan, permohonan.nama_permohonan, permohonan.status, permohonan.read');
         $this->db->from('permohonan');
         $this->db->join('users', 'permohonan.user_id = users.id');
         $this->db->where_in('status', $status);

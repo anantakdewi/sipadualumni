@@ -175,7 +175,7 @@ class monitoring_petugas extends CI_Controller
                     }
 
                 } else if($jenis_permohonan == "Lainnya"){
-                    $arr_gambar = ['legalisir'];
+                    $arr_gambar = ['dokumen'];
                     $resi = NULL;
                 }
 

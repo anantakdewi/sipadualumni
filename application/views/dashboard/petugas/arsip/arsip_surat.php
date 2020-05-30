@@ -14,15 +14,17 @@
                     <div class="container">
                         <div class="row ">
                             <div class="col-md-10">
-                                <form action="" method="POST">
+                                <form action="<?php echo base_url('petugas/arsip/cari') ?>" method="POST">
                                     <div class="input-group input-group-sm col-md-4">
                                         <input type="text" class="form-control" placeholder="ketik di sini.." name="cari_dok" autocomplete="off" autofocus>
                                         <span class="input-group-btn">
-                                            <button type="button" class="btn btn-info btn-flat">Cari</button>
+                                            <input type="submit" class="btn btn-info btn-flat" value="Cari">
                                         </span>
                                     </div>
                                 </form>
                                 <p class="margin"></p>
+
+                                <?php if(sizeof($surat) != 0) : ?>
                                 <table class="table">
                                     <thead>
                                         <tr>
@@ -36,19 +38,23 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php $i = 1; ?>
+                                        <?php $i = 1 ?>
+                                        <?php foreach($surat as $s) : ?>
                                         <!--biar urut -->
                                         <tr>
-                                            <th><?php $i++; ?></th>
-                                            <td>Surat Akreditasi Prodi</td>
-                                            <td>Ananta Kusuma</td>
+                                            <td><?php echo $i++ ?></td>
+                                            <td><?php echo $s['nama_surat'] ?></td>
+                                            <td><?php echo $s['pemohon'] ?></td>
                                             <td>
                                                 <!-- belum buat controller -->
-                                                <a href="<?php echo base_url('petugas/arsip/save') ?>" button type="button" class="btn btn-block btn-info btn-xs" style="width: 75px">Print</a>
+                                                <a href="<?php echo base_url('petugas/arsip/save/') . $s['id_dokumen'] ?>" button type="button" class="btn btn-block btn-info btn-xs" style="width: 75px">Print</a>
                                             </td>
                                         </tr>
+                                        <?php endforeach; ?>
                                     </tbody>
                                 </table>
+                                <?php endif; ?>
+
                             </div>
                         </div>
                     </div>

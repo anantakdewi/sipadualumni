@@ -38,13 +38,13 @@
                   <td>Menunggu Konfirmasi Petugas</td>
                   <td><span class="label label-warning">Pending</span></td>
                 <?php elseif($permohonan['status'] == 2) : ?>
-                  <td>Menunggu Konfirmasi Petugas</td>
-                  <td><span class="label label-warning">Pending</span></td>
+                  <td>Permohonan sedang di proses</td>
+                  <td><span class="label label-success">Proses</span></td>
                 <?php elseif($permohonan['status'] == 3) : ?>
                   <td>Permohonan tidak lengkap!</td>
                   <td><span class="label label-danger">Ditolak</span></td>
                 <?php elseif($permohonan['status'] == 4) : ?>
-                  <td>Permohonan sedang di proses</td>
+                  <td>Dokumen sedang di proses</td>
                   <td><span class="label label-success">Proses</span></td>
                 <?php elseif($permohonan['status'] == 5) : ?>
                   <td>Dokumen selesai</td>

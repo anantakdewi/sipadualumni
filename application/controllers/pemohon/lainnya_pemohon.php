@@ -39,17 +39,29 @@ class lainnya_pemohon extends CI_Controller
         //load DB Model
         $this->load->model('Permohonan');
         $this->load->model('Surat');
+        $this->load->model('Progress');
 
         // cek apakah user menginput dua permohonan
         $var1 = $this->input->post('surat_lainnya', true);
         $var2 = $this->input->post('permohonan_lain', true);
+
+        // var_dump($var1);
+        // var_dump($var2);
+        // die;
+
         if (!empty($var1) && !empty($var2)) {
             redirect(base_url('pemohon/lainnya'));
         }
 
         // die($this->input->post('permohonan_lain', true));
         if (!empty($var1)) {
+
             $this->form_validation->set_rules('surat_lainnya', '', 'numeric');
+
+        } else {
+
+            $this->form_validation->set_rules('surat_lainnya', '', 'min_length[5]');
+
         }
 
         if (!empty($_FILES['format_surat']['name'])) {
@@ -58,8 +70,10 @@ class lainnya_pemohon extends CI_Controller
 
         if ($this->form_validation->run() == false) {
             // nanti balik ke form
-            die("salah");
+
+            die('salah');
             redirect(base_url('pemohon/lainnya'));
+            
         } else {
 
             if (!empty($var1)) {
@@ -103,6 +117,16 @@ class lainnya_pemohon extends CI_Controller
 
             $id_permohonan = $this->Permohonan->insert($arr_permohonan);
 
+            $arr_progress = array(
+                'user_id' => $this->session->userdata('id'),
+                'permohonan_id' => $id_permohonan,
+                'status' => 1,
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => NULL,
+            );
+
+            $id_progress = $this->Progress->insert($arr_progress);
+
             if (!empty($_FILES['format_surat']['name'])) {
 
                 //cek direktori
@@ -128,10 +152,10 @@ class lainnya_pemohon extends CI_Controller
                 //menghilangkan path depan sebelum assets
                 $str = $details['full_path'];
                 $path = explode('/', $str);
-                unset($test[0]);
-                unset($test[1]);
-                unset($test[2]);
-                unset($test[3]);
+                unset($path[0]);
+                unset($path[1]);
+                unset($path[2]);
+                unset($path[3]);
         
                 $path = implode('/', $path);
 

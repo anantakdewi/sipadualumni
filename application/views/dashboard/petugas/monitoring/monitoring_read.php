@@ -15,19 +15,34 @@
                             <table class="table">
 
                                 <tr>
+                                    <td>Nama Pemohon</td>
                                     <td><b><?php echo $permohonan['nama']?></b></td>
                                 </tr>
                                 <tr>
+                                    <td>Email Pemohon</td>
                                     <td><?php echo $permohonan['email']?></td>
                                 </tr>
                                 <tr>
+                                    <td>NIP Pemohon</td>
                                     <td><?php echo maskNip($permohonan['nip'])?></td>
                                 </tr>
                                 <tr>
+                                    <td>Instansi Pemohon</td>
                                     <td><?php echo $permohonan['instansi']?></td>
                                 </tr>
+                                
+                                <?php if($permohonan['jenis_permohonan'] == 'Lainnya') : ?>
+
                                 <tr>
-                                    <td>Status permohonan saat ini adalah <b><?php echo $permohonan['status']?></b></td>
+                                    <td>Permohonan</td>
+                                    <td><?php echo $permohonan['nama_permohonan']?></td>
+                                </tr>
+
+                                <?php endif; ?>
+
+                                <tr>
+                                    <td>Status permohonan</td>
+                                    <td><b><?php echo $permohonan['status']?></b></td>
                                 </tr>
 
                                 <?php foreach($surat as $s): ?>

@@ -37,7 +37,7 @@
                                 <i class="fa fa-envelope bg-light-blue"></i>
                                 <div class="timeline-item">
             
-                                    <h3 class="timeline-header bg-light-blue">Permohonan diterima</h3>
+                                    <h3 class="timeline-header bg-light-blue">Permohonan diajukan</h3>
             
                                     <div class="timeline-body">
                                         Surat sudah diajukan
@@ -93,11 +93,14 @@
                                     <div class="timeline-body">
                                         <!-- progress description -->
             
-                                        Surat tidak Valid!
-            
+                                        <p>Surat tidak Valid!</p> 
+                                        <p>Mohon untuk mengajukan permohonan ulang, silahkan selesaikan permohonan ini dengan menekan tombol dibawah agar dapat mengajukan permohonan kembali</p>
+
+                                        <a href="<?php echo base_url('pemohon/konfirmasi/selesai/') . $result['id_permohonan'] ?>"><button class="btn btn-primary">Konfirmasi Selesai</button></a>
                                     </div>
                                 </div>
                             </li>
+
                         </ul>
                             
                         <?php elseif($result['status'] == 4) : ?>
@@ -150,11 +153,18 @@
                                         
                                         <h4>Silahkan unduh Dokumen dengan tombol dibawah</h4>
 
+                                        <div class="form-inline">
+
                                             <?php foreach($dokumen as $dok) : ?>
 
                                             <a href="<?php echo base_url('pemohon/download/dokumen/') . $dok['id_dokumen'] ?>"><button class="btn btn-primary">Dokumen</button></a>
 
                                             <?php endforeach; ?>
+
+                                        </div>
+
+                                        <p>Silahkan konfirmasi selesai ketika sudah mengunduh dokumen, <b>perlu di ingat pemohon hanya dapat mengunduh sebanyak 3 kali pada setiap dokumen</b></p>
+                                        <a href="<?php echo base_url('pemohon/konfirmasi/selesai/') . $result['id_permohonan'] ?>"><button class="btn btn-primary">Konfirmasi Selesai</button></a>
                                         <?php else : ?>
 
                                             <p>Dokumen telah selesai dan siap ke tahap selanjutnya</p>
@@ -216,12 +226,14 @@
             
                                 </div>
                             </li>
+
+                        </ul>
         
                         <?php endif; ?>
 
                     <?php endforeach; ?>
 
-                     </ul>
+                     
                     
             <?php else : ?>
 

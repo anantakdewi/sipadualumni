@@ -139,7 +139,6 @@ class legalisir_pemohon extends CI_Controller
                     'user_id' => $this->session->userdata('id'),
                     'permohonan_id' => $id_permohonan,
                     'status' => 1,
-                    'komentar' => "Permohonan Telah diajukan",
                     'created_at' => date("Y-m-d H:i:s"),
                     'updated_at' => NULL,
                 );
@@ -218,6 +217,7 @@ class legalisir_pemohon extends CI_Controller
 
                     redirect(base_url('pemohon/legalisir'));
                 }
+
             } else if ($this->session->userdata('tahun_abdi') < 4) {
 
                 $upload_img = array($_FILES['surat_permohonan_legalisir'], $_FILES['surat_izin_eselon_2'], $_FILES['surat_izin_pusdiklat']);
@@ -256,10 +256,10 @@ class legalisir_pemohon extends CI_Controller
                             //menghilangkan path depan sebelum assets
                             $str = $details['full_path'];
                             $path = explode('/', $str);
-                            unset($test[0]);
-                            unset($test[1]);
-                            unset($test[2]);
-                            unset($test[3]);
+                            unset($path[0]);
+                            unset($path[1]);
+                            unset($path[2]);
+                            unset($path[3]);
                     
                             $path = implode('/', $path);
 
@@ -284,11 +284,13 @@ class legalisir_pemohon extends CI_Controller
                         die($e->getMessage());
                     }
 
-                    $this->session->set_flashdata(
-                        'message',
-                        '<div class="alert alert-success" role="alert">
-                    Permohonan berhasil diajukan!</div>'
+                    $arr_flashdata = array(
+                        'type' => 'success',
+                        'title' => 'Success!',
+                        'messages' => 'Permohonan anda telah diajukan!',
                     );
+
+                    $this->session->set_flashdata('alert', $arr_flashdata);
 
                     redirect(base_url('pemohon/legalisir'));
                 }

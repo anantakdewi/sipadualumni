@@ -52,6 +52,7 @@ class pengambilan_pemohon extends CI_Controller
     {
         //load DB Model
         $this->load->model('Permohonan');
+        $this->load->model('Progress');
 
         $this->form_validation->set_rules('pengambilan_dokumen', 'Pengambilan Dokumen', 'required');
         $this->form_validation->set_rules('tgl_pengambilan', 'Tanggal Pengambilan', 'required');
@@ -82,6 +83,16 @@ class pengambilan_pemohon extends CI_Controller
 
 
                 if ($this->Permohonan->insert($arr_permohonan)) {
+
+                    $arr_progress = array(
+                        'user_id' => $this->session->userdata('id'),
+                        'permohonan_id' => $id_permohonan,
+                        'status' => 1,
+                        'created_at' => date("Y-m-d H:i:s"),
+                        'updated_at' => NULL,
+                    );
+
+                    $id_progress = $this->Progress->insert($arr_progress);
 
                     $arr_flashdata = array(
                         'type' => 'success',
