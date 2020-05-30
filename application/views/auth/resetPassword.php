@@ -29,22 +29,23 @@
 <body class="hold-transition login-page">
   <div class="login-box">
     <div class="login-logo">
-      <a href="../../index2.html">
-        <h1><b>SIPADU</b> ALUMNI</h1>
+      <img src="../assets/dist/img/up.png" class="rounded-center" width="100x">
+      <br>
+      <h1><b>SIPADU</b> ALUMNI</h1>
       </a>
       <h4>POLITEKNIK STATISTIKA STIS</h4>
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
-      <p class="login-box-msg">Reset Password</p>
+      <p class="login-box-msg">Reset Password Pengguna</p>
 
       <?php echo $this->session->flashdata('message'); ?>
 
       <form action="<?php echo base_url('auth/resetPasswordSubmit') ?>" method="post">
 
         <div class="form-group has-feedback">
-            <input type="text" name="email" class="form-control" placeholder="Email" value="<?php echo $email?>" readonly>
-            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+          <input type="text" name="email" class="form-control" placeholder="Email" value="<?php echo $email ?>" readonly>
+          <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
         </div>
 
         <div class="form-group has-feedback">

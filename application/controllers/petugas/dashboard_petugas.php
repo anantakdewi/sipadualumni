@@ -33,7 +33,7 @@ class dashboard_petugas extends CI_Controller
         // data for header
         $data = array(
             'nav_data' => 'dashboard',
-            'title' => 'Dashboard Petugas',
+            'title' => 'Dashboard',
             'breadcumb' => '',
             'small_title' => 'Halaman Utama',
         );

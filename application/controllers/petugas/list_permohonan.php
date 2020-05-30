@@ -59,7 +59,7 @@ class list_permohonan extends CI_Controller
 
 
 
-        $data['start'] = $this->uri->segment(3);
+        $data['start'] = $this->uri->segment(4);
 
         $data['list_permohonan'] = $this->list_permohonan->getList_permohonan($config['per_page'], $data['start']);
 
