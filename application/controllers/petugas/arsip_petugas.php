@@ -44,7 +44,7 @@ class arsip_petugas extends CI_Controller
     }
 
 
-    public function cariIjazah()
+    public function cariSurat()
     {
         $this->form_validation->set_rules('cari','','required');
 
@@ -55,7 +55,6 @@ class arsip_petugas extends CI_Controller
         } else {
 
             $nama = $this->input->post('nama');
-
             
         }
 

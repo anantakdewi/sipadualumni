@@ -21,7 +21,7 @@
                                     <td><?php echo $permohonan['email']?></td>
                                 </tr>
                                 <tr>
-                                    <td><?php echo $permohonan['nip']?></td>
+                                    <td><?php echo maskNip($permohonan['nip'])?></td>
                                 </tr>
                                 <tr>
                                     <td><?php echo $permohonan['instansi']?></td>
@@ -51,8 +51,8 @@
                                 <option value="2">Permohonan diterima</option>
                                 <option value="3">Dokumen permohonan tidak lengkap</option>
                                 <option value="4">Dokumen sedang diproses</option>
-                                <option value="6">Dokumen sedang dikirim</option>
                                 <option value="5">Dokumen selesai</option>
+                                <option value="6">Dokumen sedang dikirim</option>
 
                                 <?php elseif($permohonan['jenis_permohonan'] == 'Pengambilan'): ?>
 

@@ -16,23 +16,20 @@
         <div class="box-body">
             
             <!-- Timeline dari atas ke bawah -->
+            <?php if(sizeof($results) != 0) : ?>
 
-            <?php 
+                        <ul class="timeline">
 
-                if(!empty($queries)){
+                    <?php foreach($results as $result): ?>
 
-                    echo '<ul class="timeline">';
-
-                    foreach($queries as $query){
-
-                        if($query['status'] == 1){
-    
-                            echo('
+                        <?php if($result['status'] == 1): ?>
     
                             <li class="time-label">
-                                <span class="bg-light-blue">'
-                                . date('j M. Y', strtotime($query['created_at'])) .
-                                '</span>
+                                <span class="bg-light-blue">
+
+                                <?php echo date('j M. Y', strtotime($result['created_at'])) ?>
+
+                                </span>
                             </li>
     
                             <li>
@@ -48,17 +45,15 @@
             
                                 </div>
                             </li>
-        
-                            ');
-                        }
     
-                        else if($query['status'] == 2){
-                            echo('
+                        <?php elseif($result['status'] == 2) : ?>
                             
                             <li class="time-label">
-                                <span class="bg-green">'
-                                . date('j M. Y', strtotime($query['created_at'])) .
-                                '</span>
+                                <span class="bg-green">
+
+                                <?php echo date('j M. Y', strtotime($result['created_at'])) ?>
+
+                                </span>
                             </li>
     
                             <li>
@@ -71,22 +66,21 @@
                                     <div class="timeline-body">
                                         <!-- progress description -->
     
-                                       Permohonan Sedang di proses
+                                       Permohonan Sedang di proses oleh petugas
     
                                     </div>
                                 </div>
                             </li>
                             
-                            ');
                             
-                        } else if($query['status'] == 3){
-    
-                            echo('
+                        <?php elseif($result['status'] == 3) : ?>
                             
                             <li class="time-label">
-                                <span class="bg-red">'
-                                . date('j M. Y', strtotime($query['created_at'])) .
-                                '</span>
+                                <span class="bg-red">
+
+                                <?php echo date('j M. Y', strtotime($result['created_at'])) ?>
+
+                                </span>
                             </li>
     
                             <li>
@@ -104,19 +98,16 @@
                                     </div>
                                 </div>
                             </li>
-                                                    
-                            ');
-    
-                            echo '</ul>';
+                        </ul>
                             
-                        } else if($query['status'] == 4){
-    
-                            echo('
-                            
+                        <?php elseif($result['status'] == 4) : ?>
+
                             <li class="time-label">
-                                <span class="bg-light-blue">'
-                                . date('j M. Y', strtotime($query['created_at'])) .
-                                '</span>
+                                <span class="bg-light-blue">
+
+                                <?php echo date('j M. Y', strtotime($result['created_at'])) ?>
+
+                                </span>
                             </li>
     
                             <li>
@@ -129,23 +120,21 @@
                                     <div class="timeline-body">
                                         <!-- progress description -->
             
-                                        Komentar
+                                        Dokumen sedang di proses oleh petugas
             
                                     </div>
                                 </div>
                             </li>
-                                                    
-                            ');
+
+        
+                        <?php elseif($result['status'] == 5) : ?>
     
-    
-                        } else if($query['status'] == 5){
-    
-                            echo('
-                            
                             <li class="time-label">
-                                <span class="bg-green">'
-                                . date('j M. Y', strtotime($query['created_at'])) .
-                                '</span>
+                                <span class="bg-green">
+
+                                <?php echo date('j M. Y', strtotime($result['created_at'])) ?>
+
+                                </span>
                             </li>
     
                             <li>
@@ -157,53 +146,60 @@
             
                                     <div class="timeline-body">
                                         <!-- progress description -->
-            
-                                        Komentar
+                                        <?php if($result['jenis_pengambilan'] == "Unduh") : ?>
+                                        
+                                        <h4>Silahkan unduh Dokumen dengan tombol dibawah</h4>
+
+                                            <?php foreach($dokumen as $dok) : ?>
+
+                                            <a href="<?php echo base_url('pemohon/download/dokumen/') . $dok['id_dokumen'] ?>"><button class="btn btn-primary">Dokumen</button></a>
+
+                                            <?php endforeach; ?>
+                                        <?php else : ?>
+
+                                            <p>Dokumen telah selesai dan siap ke tahap selanjutnya</p>
+
+                                        <?php endif; ?>
             
                                     </div>
                                 </div>
                             </li>
-                                                    
-                            ');
-    
-    
-                        } else if($query['status'] == 6){
-    
-                            echo('
+
+                        <?php elseif($result['status'] == 6) : ?>
                             
                             <li class="time-label">
-                                <span class="bg-light-blue">'
-                                . date('j M. Y', strtotime($query['created_at'])) .
-                                '</span>
+                                <span class="bg-light-blue">
+                                <?php echo date('j M. Y', strtotime($result['created_at'])) ?>
+                                </span>
                             </li>
     
                             <li>
                                 <!-- timeline icon -->
                                 <i class="fa fa-envelope bg-light-blue"></i>
                                 <div class="timeline-item">
-            
+                                    <?php if($result['jenis_pengambilan'] == "POS") : ?>
+
                                     <h3 class="timeline-header bg-light-blue">Dokumen sedang dikirim</h3>
-            
                                     <div class="timeline-body">
                                         <!-- progress description -->
-            
-                                        Komentar
-            
+                                        <p>Permohonan telah dikirim melalui POS dengan Resi :  <?php echo $resi ?></p>
+                                         <?php if($result['statusNow'] == 6) : ?>
+                                            <a href="<?php echo base_url('pemohon/konfirmasi/sampai/') . $result['id_permohonan'] ?>"><button class="btn btn-primary">Konfirmasi Sampai</button></a>
+                                         <?php endif; ?>
                                     </div>
+
+                                    <?php endif; ?>
                                 </div>
                             </li>
-                                                    
-                            ');
+
     
     
-                        } else if($query['status'] == 7){
-    
-                            echo('
-    
+                        <?php elseif($result['status'] == 7) : ?>
+
                             <li class="time-label">
-                                <span class="bg-purple">'
-                                . date('j M. Y', strtotime($query['created_at'])) .
-                                '</span>
+                                <span class="bg-purple">
+                                    <?php echo date('j M. Y', strtotime($result['created_at'])) ?>
+                                </span>
                             </li>
     
                             <li>
@@ -214,24 +210,24 @@
                                     <h3 class="timeline-header bg-purple">Permohonan telah selesai</h3>
             
                                     <div class="timeline-body">
-                                       Permohonan telah dikirim melalui POS dengan Resi : 123810293103
+                                       <p>Silahkan Konfirmasi pada tombol dibawah untuk dapat melakukan permohonan kembali</p>
+                                       <a href="<?php echo base_url('pemohon/konfirmasi/selesai/') . $result['id_permohonan'] ?>"><button class="btn btn-primary">Konfirmasi</button></a>
                                     </div>
             
                                 </div>
                             </li>
         
-                            ');
-                        }
-                    }
+                        <?php endif; ?>
 
-                    echo '</ul>';
+                    <?php endforeach; ?>
+
+                     </ul>
                     
-                } else {
+            <?php else : ?>
 
-                    echo '<center><h2>Anda tidak memiliki permohonan aktif</h2></center>';
+                <center><h2>Anda tidak memiliki permohonan aktif</h2></center>  
 
-                }
-            ?>
+            <?php endif; ?> 
 
                 <!-- timeline label terbaru end -->
             

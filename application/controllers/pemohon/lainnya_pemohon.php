@@ -95,6 +95,7 @@ class lainnya_pemohon extends CI_Controller
                 'resi' => NULL,
                 'status' => 1,
                 'read' => 0,
+                'selesai' => 0,
                 'tgl_ambil' => NULL,
                 'created_at' => date("Y-m-d H:i:s"),
                 'updated_at' => NULL,

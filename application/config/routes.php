@@ -63,7 +63,8 @@ $route['/'] = 'auth/login';
 
 // Dashboard Petugas
 $route['petugas/dashboard'] = 'petugas/dashboard_petugas';
-$route['petugas/dashboard/pengumuman'] = 'petugas/dashboard_petugas/postPengumuman';
+$route['petugas/dashboard/pengumuman'] = 'petugas/dashboard_petugas/pengumuman';
+$route['petugas/dashboard/pengumuman/submit'] = 'petugas/dashboard_petugas/postPengumuman';
 
 // Daftar Permohonan Petugas
 //pagenation permohonan baru
@@ -107,6 +108,15 @@ $route['pemohon/monitoring'] = 'pemohon/dashboard_pemohon/monitoring';
 $route['pemohon/legalisir'] = 'pemohon/dashboard_pemohon/legalisir';
 $route['pemohon/pengambilan'] = 'pemohon/dashboard_pemohon/pengambilan';
 $route['pemohon/lainnya'] = 'pemohon/dashboard_pemohon/lainnya';
+
+//Download Dokumen Selesai
+$route['pemohon/download/dokumen/:num'] = 'pemohon/dashboard_pemohon/downloadDokumen';
+
+//konfirmasi Sampai
+$route['pemohon/konfirmasi/sampai/:num'] = 'pemohon/dashboard_pemohon/konfirmasi';
+
+//konfirmasi selesai
+$route['pemohon/konfirmasi/selesai/:num'] = 'pemohon/dashboard_pemohon/konfirmasi';
 
 // Legalisir Pemohon
 $route['pemohon/legalisir/pengajuan'] = 'pemohon/legalisir_pemohon/showForm';
