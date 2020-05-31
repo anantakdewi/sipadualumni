@@ -38,6 +38,13 @@
                                     <td><?php echo $permohonan['nama_permohonan']?></td>
                                 </tr>
 
+                                <?php elseif($permohonan['jenis_permohonan'] == "Pengambilan") : ?>
+
+                                <tr>
+                                    <td>Waktu Diambil</td>
+                                    <td><b><?php echo date('j M Y', strtotime($permohonan['tgl_ambil'])) ?></b></td>
+                                </tr>
+
                                 <?php endif; ?>
 
                                 <tr>
@@ -57,6 +64,7 @@
                             <input type="hidden" name="id_permohonan" value="<?php echo $permohonan['id_permohonan'] ?>">
                             <input type="hidden" name="jenis_permohonan" value="<?php echo $permohonan['jenis_permohonan'] ?>">
                             <input type="hidden" name="id_user" value="<?php echo $permohonan['id_user'] ?>">
+                            <input type="hidden" name="jenis_pengambilan" value="<?php echo $permohonan['jenis_pengambilan'] ?>">
 
                             <label>Pilih Status Permohonan</label>
                             <select class="form-control" name="status" id="statusPermohonan">
@@ -87,21 +95,24 @@
                         </div>
 
                         <?php if($permohonan['jenis_permohonan'] == "Legalisir"): ?>
-                        <div class="form-group">
 
-                            <label for="exampleInputFile">Unggah Legalisir Ijazah</label>
-                            <input type="file" name="legalisir" class="form-control">
-                            <p class="help-block">Format file yang dapat diunggah hanya pdf dan doc.</p>
+                            <?php if($permohonan['jenis_pengambilan'] == "Unduh"): ?>
+                            <div class="form-group">
 
-                        </div>
+                                <label for="exampleInputFile">Unggah Legalisir Ijazah</label>
+                                <input type="file" name="legalisir" class="form-control">
+                                <p class="help-block">Format file yang dapat diunggah hanya pdf dan doc.</p>
 
-                        <div class="form-group">
+                            </div>
 
-                            <label for="exampleInputFile">Unggah Legalisir Transkrip Nilai</label>
-                            <input type="file" name="transkrip" class="form-control">
-                            <p class="help-block">Format file yang dapat diunggah hanya pdf dan doc.</p>
+                            <div class="form-group">
 
-                        </div>
+                                <label for="exampleInputFile">Unggah Legalisir Transkrip Nilai</label>
+                                <input type="file" name="transkrip" class="form-control">
+                                <p class="help-block">Format file yang dapat diunggah hanya pdf dan doc.</p>
+
+                            </div>
+                            <?php endif ?>
                         
                             <?php if($permohonan['jenis_pengambilan'] == "POS"): ?>
                             <div class="form-group">

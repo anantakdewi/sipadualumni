@@ -81,8 +81,9 @@ class pengambilan_pemohon extends CI_Controller
                     'created_at' => date("Y-m-d H:i:s")
                 );
 
+                $id_permohonan = $this->Permohonan->insert($arr_permohonan);
 
-                if ($this->Permohonan->insert($arr_permohonan)) {
+                if (isset($id_permohonan)) {
 
                     $arr_progress = array(
                         'user_id' => $this->session->userdata('id'),

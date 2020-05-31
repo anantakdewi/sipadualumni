@@ -165,8 +165,15 @@
 
                                         <p>Silahkan konfirmasi selesai ketika sudah mengunduh dokumen, <b>perlu di ingat pemohon hanya dapat mengunduh sebanyak 3 kali pada setiap dokumen</b></p>
                                         <a href="<?php echo base_url('pemohon/konfirmasi/selesai/') . $result['id_permohonan'] ?>"><button class="btn btn-primary">Konfirmasi Selesai</button></a>
-                                        <?php else : ?>
 
+                                        <?php elseif($result['jenis_pengambilan'] == "Ambil Sendiri" || $result['jenis_pengambilan'] == "Diwakilkan") : ?>
+
+                                        <p>Permohonan telah selesai, silahkan di ambil dan konfirmasi selesai jika sudah diambil</p>
+                                        <a href="<?php echo base_url('pemohon/konfirmasi/selesai/') . $result['id_permohonan'] ?>"><button class="btn btn-primary">Konfirmasi Selesai</button></a>
+
+                                        <?php else : ?> 
+
+                                             <!-- INI DISINI POS -->
                                             <p>Dokumen telah selesai dan siap ke tahap selanjutnya</p>
 
                                         <?php endif; ?>

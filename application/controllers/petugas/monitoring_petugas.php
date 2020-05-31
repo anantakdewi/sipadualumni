@@ -116,26 +116,44 @@ class monitoring_petugas extends CI_Controller
 
     public function post()
     {
+
         $this->load->model('Dokumen');
         $this->load->model('Progress');
 
         $this->form_validation->set_rules('status','', 'required');
         
+
+        // kalau dokumen selesai, jenis permohonan lainnya dan jenis pengambilan unduh, upload filenya
         if($this->input->post('status') == 5){
 
-            if($this->input->post('jenis_permohonan') == "Legalisir"){
+            if ($this->input->post('jenis_permohonan') == "Lainnya"){
+
+                $this->form_validation->set_rules('dokumen', '', 'callback_file_check[dokumen]');
+
+            } else if($this->input->post('jenis_pengambilan') == "Unduh"){
 
                 $this->form_validation->set_rules('legalisir', '', 'callback_file_check[legalisir]');
                 $this->form_validation->set_rules('transkrip', '', 'callback_file_check[transkrip]');
-                $this->form_validation->set_rules('resi','','numeric');
-
-            } else if ($this->input->post('jenis_permohonan') == "Lainnya"){
-
-                $this->form_validation->set_rules('dokumen', '', 'callback_file_check[dokumen]');
 
             }
 
         }
+
+        if($this->input->post('status') == 6){
+
+            if($this->input->post('jenis_pengambilan') == "POS"){
+                $this->form_validation->set_rules('resi','','required|numeric');
+            } 
+
+        }
+
+        // if($this->input->post('jenis_permohonan') == "Legalisir" && $this->input->post('jenis_pengambilan') != "Ambil Sendiri" && $this->input->post('jenis_pengambilan') != "Diwakilkan"){
+
+        //     $this->form_validation->set_rules('legalisir', '', 'callback_file_check[legalisir]');
+        //     $this->form_validation->set_rules('transkrip', '', 'callback_file_check[transkrip]');
+        //     $this->form_validation->set_rules('resi','','numeric');
+
+        // }
         
         $this->form_validation->set_rules('id_permohonan','','required|numeric');
         $this->form_validation->set_rules('jenis_permohonan','','required');
@@ -158,7 +176,7 @@ class monitoring_petugas extends CI_Controller
             $id_permohonan = $this->input->post('id_permohonan');
             $jenis_permohonan = $this->input->post('jenis_permohonan');
             $id_user = $this->input->post('id_user');
-
+            $jenis_pengambilan = $this->input->post('jenis_pengambilan');
 
             $status = $this->input->post('status');
             
@@ -168,91 +186,89 @@ class monitoring_petugas extends CI_Controller
 
                     $arr_gambar = ['legalisir', 'transkrip'];
 
-                    if(!is_null($this->input->post('resi'))){
-                        $resi = $this->input->post('resi');
-                    } else {
-                        $resi = NULL;
-                    }
-
                 } else if($jenis_permohonan == "Lainnya"){
                     $arr_gambar = ['dokumen'];
                     $resi = NULL;
                 }
 
-                foreach($arr_gambar as $gambar){
+                if($jenis_pengambilan == "Unduh"){
 
-                    $img = $_FILES[$gambar];
+                    foreach($arr_gambar as $gambar){
 
-                    if ($img) {
-        
-                        try {
-        
-                            //cek direktori
-                            if (!is_dir('assets/fileToPemohon/' . date("Y") . '/' . date("M") . '/')) {
-                                mkdir('./assets/fileToPemohon/' . date("Y") . '/' . date("M") . '/', 0777, TRUE);
+                        $img = $_FILES[$gambar];
+
+                        if ($img) {
+            
+                            try {
+            
+                                //cek direktori
+                                if (!is_dir('assets/fileToPemohon/' . date("Y") . '/' . date("M") . '/')) {
+                                    mkdir('./assets/fileToPemohon/' . date("Y") . '/' . date("M") . '/', 0777, TRUE);
+                                }
+            
+                                $config['upload_path']          = './assets/fileToPemohon/' . date("Y") . '/' . date("M") . '/';
+                                $config['allowed_types']        = 'pdf|doc|docx';
+                                $config['max_size']             = 2048;
+                                $config['file_name']            = time();
+            
+                                $this->load->library('upload', $config);
+                                $this->upload->initialize($config);
+            
+                                if (!$this->upload->do_upload($gambar)) {
+            
+                                    $error = $this->upload->display_errors();
+                                    die($error);
+            
+                                } else {
+            
+                                    $details = $this->upload->data();
+            
+                                }
+            
+                                //menghilangkan path depan sebelum assets
+                                $str = $details['full_path'];
+                                $path = explode('/', $str);
+                                
+                                // print "<pre>";
+                                // print_r($path);
+                                // die();
+
+                                unset($path[0]);
+                                unset($path[1]);
+                                unset($path[2]);
+                                unset($path[3]);
+                        
+                                $path = implode('/', $path);
+            
+                                $dokumen = array(
+                                    'permohonan_id' => $id_permohonan,
+                                    'jenis_dokumen' => $jenis_permohonan,
+                                    'path' => $path,
+                                    'status' => 1,
+                                    'count' => 0,
+                                    'created_at' => date("Y-m-d H:i:s"),
+                                );
+            
+                                $this->Dokumen->insert($dokumen);
+            
+                                // print "<pre>";
+                                // print_r($img);
+                                // print "<pre>";
+                                // die();
+                            } catch (\Exception  $e) {
+                                die($e->getMessage());
                             }
-        
-                            $config['upload_path']          = './assets/fileToPemohon/' . date("Y") . '/' . date("M") . '/';
-                            $config['allowed_types']        = 'pdf|doc|docx';
-                            $config['max_size']             = 2048;
-                            $config['file_name']            = time();
-        
-                            $this->load->library('upload', $config);
-                            $this->upload->initialize($config);
-        
-                            if (!$this->upload->do_upload($gambar)) {
-        
-                                $error = $this->upload->display_errors();
-                                die($error);
-        
-                            } else {
-        
-                                $details = $this->upload->data();
-        
-                            }
-        
-                            //menghilangkan path depan sebelum assets
-                            $str = $details['full_path'];
-                            $path = explode('/', $str);
-                            
-                            // print "<pre>";
-                            // print_r($path);
-                            // die();
 
-                            unset($path[0]);
-                            unset($path[1]);
-                            unset($path[2]);
-                            unset($path[3]);
-                    
-                            $path = implode('/', $path);
-        
-                            $dokumen = array(
-                                'permohonan_id' => $id_permohonan,
-                                'jenis_dokumen' => $jenis_permohonan,
-                                'path' => $path,
-                                'status' => 1,
-                                'count' => 0,
-                                'created_at' => date("Y-m-d H:i:s"),
-                            );
-        
-                            $this->Dokumen->insert($dokumen);
-        
-                            // print "<pre>";
-                            // print_r($img);
-                            // print "<pre>";
-                            // die();
-                        } catch (\Exception  $e) {
-                            die($e->getMessage());
                         }
-
+                        
                     }
-                    
+
                 }
+
 
                 try {
 
                     $this->db->set('status', $status);
-                    $this->db->set('resi', $resi);
                     $this->db->where('id', $id_permohonan);
                     $this->db->update('permohonan');
 
@@ -282,9 +298,21 @@ class monitoring_petugas extends CI_Controller
                 
             }
 
+
             try {
 
+                if(!is_null($this->input->post('resi'))){
+
+                    $resi = $this->input->post('resi');
+
+                } else {
+
+                    $resi = NULL;
+
+                }
+
                 $this->db->set('status', $status);
+                $this->db->set('resi', $resi);
                 $this->db->where('id', $id_permohonan);
                 $this->db->update('permohonan');
 
@@ -294,8 +322,6 @@ class monitoring_petugas extends CI_Controller
                     'status' => $status,
                     'created_at' => date('Y-m-d H:i:s'),
                 );
-
-
 
                 $this->Progress->insert($progress);
 

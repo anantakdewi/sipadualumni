@@ -188,6 +188,7 @@ class legalisir_pemohon extends CI_Controller
 
                             $surat = array(
                                 'permohonan_id' => $id_permohonan,
+                                'nama_surat' => ucwords(str_replace('_', ' ', $arr_var_gambar[$i])),
                                 'path' => $details['full_path'],
                                 'status' => 1,
                                 'created_at' => date("Y-m-d H:i:s"),
