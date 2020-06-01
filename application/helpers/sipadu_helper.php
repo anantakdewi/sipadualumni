@@ -90,16 +90,16 @@ function maskNip($nip_kasar){
         } else if($i == 8 && $space == 1){
             $nip .= ' ';
             $space++;
-        } else if($i <= 14){
+        } else if($i < 14){
             $nip .= $nipKasar[$i];
             $i++;
-        } else if($i == 15 && $space == 2){
+        } else if($i == 14 && $space == 2){
             $nip .= ' ';
             $space++;
-        } else if($i == 15){
+        } else if($i == 14){
             $nip .= $nipKasar[$i];
             $i++;
-        } else if($i == 16 && $space == 3){
+        } else if($i == 15 && $space == 3){
             $nip .= ' ';
             $space++;
         } else if($i <= 18) {
